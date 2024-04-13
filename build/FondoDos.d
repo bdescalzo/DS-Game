@@ -1,0 +1,1 @@
+FondoDos.o: FondoDos.s

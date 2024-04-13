@@ -1,0 +1,1 @@
+FondoUno.o: FondoUno.s
