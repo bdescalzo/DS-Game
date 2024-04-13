@@ -17,14 +17,14 @@ y en otro ejemplo de Jaeden Ameronen
 #include "fondos.h"
 
 int tiempo;
-
+touchPosition pos_pantalla;
 void juego()
 {	
 	// Definiciones de variables
 	int i=9;
 	int tecla=0;;
 
-	ESTADO=ESPERA;
+	ESTADO=MENU;
 	
 	// Escribe en la fila 22 columna 5 de la pantalla	
 	iprintf("\x1b[22;5HProbando la pantalla de texto");						
@@ -33,42 +33,21 @@ void juego()
 	iprintf("\x1b[23;5HProbando la escritura con variable. Valor=%d", i);
 	visualizarFondoUno();
 
-	//*******************************EN LA 2.ACTIVIDAD ********************************//
-        // LLAMADAS A REALIZAR:
-	// Configurar el teclado.
-	// Configurar el temporizador.
-	// Establecer las rutinas de atención a interrupciones
-	// Habilitar las interrupciones del teclado.
-	// Habilitar las interrupciones del temporizador.
-	// Habilitar interrupciones.
-	//******************************************************************************//
-
-	
-
 
 	while(1)
 	{	
-      /*******************************EN LA 1.ACTIVIDAD*****************************************/
-		/* Si el estado es ESPERA: codificar aquí la encuesta del teclado, sacar por pantalla la tecla que se ha pulsado, y si se pulsa la tecla START cambiar de estado */
-	
-		if (ESTADO==ESPERA) 
-		{	if (TeclaDetectada()==1)
-			{ tecla=TeclaPulsada();
-			iprintf("\x1b[12;0HLa tecla pulsada es: %d.!", tecla);
-			if (tecla==START)
-				{ iprintf("\x1b[14;0HCambia estado");
-				visualizarPuerta();
-				ESTADO=CERRADA;
-				}
-			}
-		} else if (ESTADO==CERRADA){
-			if (TeclaDetectada()==1){
-				tecla=TeclaPulsada();
-			}
-			if (tecla==A){
-				visualizarPuertaAbierta();
-				ESTADO=ABIERTA;
-			}
+		if (ESTADO==MENU) 
+		{	
+			// Encuestamos a la pantalla: No nos interesa abandonar esta encuesta hasta que se presione el botón.
+			// TODO: limitar la pulsación válida al área del botón.
+			touchRead(&pos_pantalla); // lectura de la posición
+ 			while(pos_pantalla.px==0 && pos_pantalla.py==0) // encuesta
+				touchRead(&pos_pantalla); // lectura de la posición
+			ESTADO=JUEGO;
+		}
+		if (ESTADO==JUEGO)
+		{
+			visualizarFondoDos();
 		}
 	}
 	// Valorar si hay que inhibir las interrupciones
