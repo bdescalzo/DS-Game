@@ -1,4 +1,4 @@
-rutinasAtencion.o: /home/user/Proyecto/source/rutinasAtencion.c \
+rutinasAtencion.o: /home/user/Desktop/ECes/source/rutinasAtencion.c \
   /opt/devkitPro/libnds/include/nds.h \
   /opt/devkitPro/libnds/include/nds/libversion.h \
   /opt/devkitPro/libnds/include/nds/ndstypes.h \
@@ -47,10 +47,10 @@ rutinasAtencion.o: /home/user/Proyecto/source/rutinasAtencion.c \
   /opt/devkitPro/libnds/include/nds/arm9/sprite.h \
   /opt/devkitPro/libnds/include/nds/system.h \
   /opt/devkitPro/libnds/include/nds/arm9/decompress.h \
-  /home/user/Proyecto/include/definiciones.h \
-  /home/user/Proyecto/include/perifericos.h \
-  /home/user/Proyecto/include/fondos.h \
-  /home/user/Proyecto/include/sprites.h
+  /home/user/Desktop/ECes/include/definiciones.h \
+  /home/user/Desktop/ECes/include/perifericos.h \
+  /home/user/Desktop/ECes/include/fondos.h \
+  /home/user/Desktop/ECes/include/sprites.h
 
 /opt/devkitPro/libnds/include/nds.h:
 
@@ -148,10 +148,10 @@ rutinasAtencion.o: /home/user/Proyecto/source/rutinasAtencion.c \
 
 /opt/devkitPro/libnds/include/nds/arm9/decompress.h:
 
-/home/user/Proyecto/include/definiciones.h:
+/home/user/Desktop/ECes/include/definiciones.h:
 
-/home/user/Proyecto/include/perifericos.h:
+/home/user/Desktop/ECes/include/perifericos.h:
 
-/home/user/Proyecto/include/fondos.h:
+/home/user/Desktop/ECes/include/fondos.h:
 
-/home/user/Proyecto/include/sprites.h:
+/home/user/Desktop/ECes/include/sprites.h:

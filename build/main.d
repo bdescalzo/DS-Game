@@ -1,4 +1,4 @@
-main.o: /home/user/Proyecto/source/main.c \
+main.o: /home/user/Desktop/ECes/source/main.c \
   /opt/devkitPro/libnds/include/nds.h \
   /opt/devkitPro/libnds/include/nds/libversion.h \
   /opt/devkitPro/libnds/include/nds/ndstypes.h \
@@ -47,10 +47,10 @@ main.o: /home/user/Proyecto/source/main.c \
   /opt/devkitPro/libnds/include/nds/arm9/sprite.h \
   /opt/devkitPro/libnds/include/nds/system.h \
   /opt/devkitPro/libnds/include/nds/arm9/decompress.h \
-  /home/user/Proyecto/include/graficos.h \
-  /home/user/Proyecto/include/definiciones.h \
-  /home/user/Proyecto/include/sprites.h \
-  /home/user/Proyecto/include/juego.h
+  /home/user/Desktop/ECes/include/graficos.h \
+  /home/user/Desktop/ECes/include/definiciones.h \
+  /home/user/Desktop/ECes/include/sprites.h \
+  /home/user/Desktop/ECes/include/juego.h
 
 /opt/devkitPro/libnds/include/nds.h:
 
@@ -148,10 +148,10 @@ main.o: /home/user/Proyecto/source/main.c \
 
 /opt/devkitPro/libnds/include/nds/arm9/decompress.h:
 
-/home/user/Proyecto/include/graficos.h:
+/home/user/Desktop/ECes/include/graficos.h:
 
-/home/user/Proyecto/include/definiciones.h:
+/home/user/Desktop/ECes/include/definiciones.h:
 
-/home/user/Proyecto/include/sprites.h:
+/home/user/Desktop/ECes/include/sprites.h:
 
-/home/user/Proyecto/include/juego.h:
+/home/user/Desktop/ECes/include/juego.h:
