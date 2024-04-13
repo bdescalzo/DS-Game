@@ -1,4 +1,4 @@
-fondos.o: /home/user/Desktop/ECes/source/fondos.c \
+fondos.o: /home/user/SharedFiles/ProyectoEC/EC/source/fondos.c \
   /opt/devkitPro/libnds/include/nds.h \
   /opt/devkitPro/libnds/include/nds/libversion.h \
   /opt/devkitPro/libnds/include/nds/ndstypes.h \
@@ -47,12 +47,12 @@ fondos.o: /home/user/Desktop/ECes/source/fondos.c \
   /opt/devkitPro/libnds/include/nds/arm9/sprite.h \
   /opt/devkitPro/libnds/include/nds/system.h \
   /opt/devkitPro/libnds/include/nds/arm9/decompress.h \
-  /home/user/Desktop/ECes/include/fondos.h \
-  /home/user/Desktop/ECes/include/graficos.h \
-  /home/user/Desktop/ECes/build/FondoUno.h \
-  /home/user/Desktop/ECes/build/FondoDos.h \
-  /home/user/Desktop/ECes/build/Puerta.h \
-  /home/user/Desktop/ECes/build/PuertaAbierta.h
+  /home/user/SharedFiles/ProyectoEC/EC/include/fondos.h \
+  /home/user/SharedFiles/ProyectoEC/EC/include/graficos.h \
+  /home/user/SharedFiles/ProyectoEC/EC/build/FondoUno.h \
+  /home/user/SharedFiles/ProyectoEC/EC/build/FondoDos.h \
+  /home/user/SharedFiles/ProyectoEC/EC/build/Puerta.h \
+  /home/user/SharedFiles/ProyectoEC/EC/build/PuertaAbierta.h
 
 /opt/devkitPro/libnds/include/nds.h:
 
@@ -150,14 +150,14 @@ fondos.o: /home/user/Desktop/ECes/source/fondos.c \
 
 /opt/devkitPro/libnds/include/nds/arm9/decompress.h:
 
-/home/user/Desktop/ECes/include/fondos.h:
+/home/user/SharedFiles/ProyectoEC/EC/include/fondos.h:
 
-/home/user/Desktop/ECes/include/graficos.h:
+/home/user/SharedFiles/ProyectoEC/EC/include/graficos.h:
 
-/home/user/Desktop/ECes/build/FondoUno.h:
+/home/user/SharedFiles/ProyectoEC/EC/build/FondoUno.h:
 
-/home/user/Desktop/ECes/build/FondoDos.h:
+/home/user/SharedFiles/ProyectoEC/EC/build/FondoDos.h:
 
-/home/user/Desktop/ECes/build/Puerta.h:
+/home/user/SharedFiles/ProyectoEC/EC/build/Puerta.h:
 
-/home/user/Desktop/ECes/build/PuertaAbierta.h:
+/home/user/SharedFiles/ProyectoEC/EC/build/PuertaAbierta.h:
