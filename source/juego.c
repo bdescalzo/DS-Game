@@ -16,7 +16,15 @@ y en otro ejemplo de Jaeden Ameronen
 #include "rutinasAtencion.h"
 #include "fondos.h"
 
+// VARIABLES PRINCIPALES
 int tiempo;
+double velocidad;
+bool pulsado;
+int puntuacion = 0;
+double tiempo = 3;
+int temp = 0;
+int tecla;
+
 touchPosition pos_pantalla;
 void juego()
 {	
