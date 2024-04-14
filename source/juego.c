@@ -17,7 +17,6 @@ y en otro ejemplo de Jaeden Ameronen
 #include "fondos.h"
 
 // VARIABLES PRINCIPALES
-int tiempo;
 double velocidad;
 bool pulsado;
 int puntuacion = 0;
@@ -26,6 +25,9 @@ int temp = 0;
 int tecla;
 
 touchPosition pos_pantalla;
+
+int teclaAlAzar();
+
 void juego()
 {	
 	// Definiciones de variables
@@ -65,15 +67,17 @@ void juego()
 		}
 		if (ESTADO==JUEGO)
 		{
-			visualizarFondoDos();
-						touchRead(&pos_pantalla); // lectura de la posición
+			visualizarFondoDos();		
+				touchRead(&pos_pantalla); // lectura de la posición
 				iprintf("\x1b[10;3HValor horizontal de pos_pantalla: %d", pos_pantalla.px);						
 				iprintf("\x1b[14;3HValor vertical de pos_pantalla: %d", pos_pantalla.py);						
-
+				iprintf("\x1b[4:3H]Num al azar: %d", teclaAlAzar());
 		}
 	}
 	// Valorar si hay que inhibir las interrupciones
 }
 
-
-
+// Elige un valor al azar del 0 al 7
+int teclaAlAzar() {
+	return (rand() % 8);
+}
