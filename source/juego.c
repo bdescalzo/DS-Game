@@ -33,21 +33,35 @@ void juego()
 	iprintf("\x1b[23;5HProbando la escritura con variable. Valor=%d", i);
 	visualizarFondoUno();
 
+			iprintf("\x1b[10;3HValor horizontal de pos_pantalla: %d", pos_pantalla.px);						
+			iprintf("\x1b[14;3HValor vertical de pos_pantalla: %d", pos_pantalla.py);						
+
+	touchRead(&pos_pantalla); // Primera lectura de la pantalla para establecer valores iniciales
 
 	while(1)
 	{	
 		if (ESTADO==MENU) 
 		{	
 			// Encuestamos a la pantalla: No nos interesa abandonar esta encuesta hasta que se presione el botón.
-			// TODO: limitar la pulsación válida al área del botón.
 			touchRead(&pos_pantalla); // lectura de la posición
- 			while(pos_pantalla.px==0 && pos_pantalla.py==0) // encuesta
+
+			// Revisamos por encuesta que no se haya presionado el área del botón
+ 			while(!((55<=pos_pantalla.px && pos_pantalla.py<=205)) || !(99<=pos_pantalla.py && pos_pantalla.py<=161)) { // encuesta
 				touchRead(&pos_pantalla); // lectura de la posición
+				iprintf("\x1b[10;3HValor horizontal de pos_pantalla: %d", pos_pantalla.px);						
+				iprintf("\x1b[14;3HValor vertical de pos_pantalla: %d", pos_pantalla.py);						
+			}
+			iprintf("\x1b[22;5HPASAMOS AL ESTADO JUEGO POR LOS VALORES %d y %d", pos_pantalla.px, pos_pantalla.py);						
+
 			ESTADO=JUEGO;
 		}
 		if (ESTADO==JUEGO)
 		{
 			visualizarFondoDos();
+						touchRead(&pos_pantalla); // lectura de la posición
+				iprintf("\x1b[10;3HValor horizontal de pos_pantalla: %d", pos_pantalla.px);						
+				iprintf("\x1b[14;3HValor vertical de pos_pantalla: %d", pos_pantalla.py);						
+
 		}
 	}
 	// Valorar si hay que inhibir las interrupciones
