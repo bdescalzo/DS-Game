@@ -22,7 +22,7 @@ int main(void) {
 
 	inicializarGraficosSprites();
 	HabilitarInterrupciones();
-	ConfigurarTemporizador(37942,1);
+	ConfigurarTemporizador(39322,1); //para 20 ticks/sec
 	ConfigurarTeclado(0x0C);
 	// Llamada al juego que vosotros programaréis
 	juego();

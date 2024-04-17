@@ -66,6 +66,7 @@ void juego()
 			iprintf("\x1b[22;5HPASAMOS AL ESTADO JUEGO POR LOS VALORES %d y %d", pos_pantalla.px, pos_pantalla.py);						
 
 			ESTADO=JUEGO;
+			PonerEnMarchaTempo();
 		}
 		if (ESTADO==JUEGO)
 		{
