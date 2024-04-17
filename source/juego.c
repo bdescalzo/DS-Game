@@ -21,9 +21,10 @@ double velocidad;
 bool pulsado;
 int puntuacion = 0;
 double tiempo = 3;
-int temp = 0;
+double temp = 0;
 int teclaAPulsar;
 bool encontrado;
+bool teclaAPulsarSeleccionada;
 
 touchPosition pos_pantalla;
 
@@ -69,41 +70,49 @@ void juego()
 		if (ESTADO==JUEGO)
 		{
 			encontrado = false;
-			visualizarFondoDos();	
-			while(){
+			teclaAPulsarSeleccionada = false;
+			visualizarFondoDos();
+			if (teclaAPulsarSeleccionada== false){
 				int teclaAPulsar= teclaAlAzar();
-				switch (teclaAPulsar){
-					case 0:
-						teclaAPulsar = A;
-						break;
-					case 1:
-					teclaAPulsar = B;
-						break;
-					case 2:
-						teclaAPulsar = DERECHA;
-						break;
-					case 3:
-						teclaAPulsar = IZQUIERDA;
-						break;
-					case 4:
-						teclaAPulsar = ARRIBA;
-						break;
-					case 5:
-						teclaAPulsar = ABAJO;
-						break;
-					case 6:
-						teclaAPulsar = R;
-						break;
-					case 7:
-						teclaAPulsar = L;	
-						break;
-					default:
-						break;
-				}
-				iprintf("\x1b[14;3HTecla a pulsar %d", tecla);	
-
-				
+			switch (teclaAPulsar){
+				case 0:
+					teclaAPulsar = A;
+					break;
+				case 1:
+				teclaAPulsar = B;
+					break;
+				case 2:
+					teclaAPulsar = DERECHA;
+					break;
+				case 3:
+					teclaAPulsar = IZQUIERDA;
+					break;
+				case 4:
+					teclaAPulsar = ARRIBA;
+					break;
+				case 5:
+					teclaAPulsar = ABAJO;
+					break;
+				case 6:
+					teclaAPulsar = R;
+					break;
+				case 7:
+					teclaAPulsar = L;	
+					break;
+				default:
+					break;
 			}
+			teclaAPulsarSeleccionada=true;
+			}	
+
+			if(!(teclaPulsada()==teclaAPulsar)){
+				ESTADO=FINAL;
+			}
+
+		}
+		if (ESTADO==FINAL){
+			sleep(10);
+			ESTADO=MENU;
 		}
 	}
 	// Valorar si hay que inhibir las interrupciones
