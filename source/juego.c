@@ -22,7 +22,8 @@ bool pulsado;
 int puntuacion = 0;
 double tiempo = 3;
 int temp = 0;
-int tecla;
+int teclaAPulsar;
+bool encontrado;
 
 touchPosition pos_pantalla;
 
@@ -67,11 +68,42 @@ void juego()
 		}
 		if (ESTADO==JUEGO)
 		{
-			visualizarFondoDos();		
-				touchRead(&pos_pantalla); // lectura de la posición
-				iprintf("\x1b[10;3HValor horizontal de pos_pantalla: %d", pos_pantalla.px);						
-				iprintf("\x1b[14;3HValor vertical de pos_pantalla: %d", pos_pantalla.py);						
-				iprintf("\x1b[4:3H]Num al azar: %d", teclaAlAzar());
+			encontrado = false;
+			visualizarFondoDos();	
+			while(){
+				int teclaAPulsar= teclaAlAzar();
+				switch (teclaAPulsar){
+					case 0:
+						teclaAPulsar = A;
+						break;
+					case 1:
+					teclaAPulsar = B;
+						break;
+					case 2:
+						teclaAPulsar = DERECHA;
+						break;
+					case 3:
+						teclaAPulsar = IZQUIERDA;
+						break;
+					case 4:
+						teclaAPulsar = ARRIBA;
+						break;
+					case 5:
+						teclaAPulsar = ABAJO;
+						break;
+					case 6:
+						teclaAPulsar = R;
+						break;
+					case 7:
+						teclaAPulsar = L;	
+						break;
+					default:
+						break;
+				}
+				iprintf("\x1b[14;3HTecla a pulsar %d", tecla);	
+
+				
+			}
 		}
 	}
 	// Valorar si hay que inhibir las interrupciones
