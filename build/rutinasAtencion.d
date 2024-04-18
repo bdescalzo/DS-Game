@@ -51,7 +51,8 @@ rutinasAtencion.o:  \
   /home/user/SharedFiles/ProyectoEC/EC/include/definiciones.h \
   /home/user/SharedFiles/ProyectoEC/EC/include/perifericos.h \
   /home/user/SharedFiles/ProyectoEC/EC/include/fondos.h \
-  /home/user/SharedFiles/ProyectoEC/EC/include/sprites.h
+  /home/user/SharedFiles/ProyectoEC/EC/include/sprites.h \
+  /home/user/SharedFiles/ProyectoEC/EC/include/juego.h
 
 /opt/devkitPro/libnds/include/nds.h:
 
@@ -156,3 +157,5 @@ rutinasAtencion.o:  \
 /home/user/SharedFiles/ProyectoEC/EC/include/fondos.h:
 
 /home/user/SharedFiles/ProyectoEC/EC/include/sprites.h:
+
+/home/user/SharedFiles/ProyectoEC/EC/include/juego.h:

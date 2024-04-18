@@ -106,13 +106,15 @@ void juego()
 			teclaAPulsarSeleccionada=true;
 			}	
 
-			if(!(teclaPulsada()==teclaAPulsar)){
-				ESTADO=FINAL;
+			if(!(TeclaPulsada()==teclaAPulsar)){
+				ESTADO=FIN;
 			}
 
 		}
-		if (ESTADO==FINAL){
-			sleep(10);
+		if (ESTADO==FIN){
+			while (true) {
+
+			}
 			ESTADO=MENU;
 		}
 	}
