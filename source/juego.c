@@ -43,7 +43,7 @@ void juego()
 
 /* Si se quiere visualizar el valor de una variable escribir %d dentro de las comillas y el nombre de la variable fuera de las comillas */
 	iprintf("\x1b[23;5HProbando la escritura con variable. Valor=%d", i);
-	visualizarFondoUno();
+	visualizarPantallaJugar();
 
 			iprintf("\x1b[10;3HValor horizontal de pos_pantalla: %d", pos_pantalla.px);						
 			iprintf("\x1b[14;3HValor vertical de pos_pantalla: %d", pos_pantalla.py);						
