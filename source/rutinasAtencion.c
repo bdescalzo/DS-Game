@@ -15,6 +15,15 @@ int seg3;   // Para ver si pasan tres segundos
 
 void RutAtencionTeclado ()
 {
+	if(ESTADO == JUEGO && TeclaPulsada == START){
+
+			ESTADO=PAUSA;
+			PararTempo;
+	if(ESTADO == PAUSA && TeclaPulsada == START){
+
+			ESTADO=JUEGO;
+			PonerEnMarchaTempo;
+	}
 //if (ESTADO == CERRADA)
 //{	
 //	if (TeclaPulsada()==A)
@@ -54,4 +63,3 @@ void EstablecerVectorInt()
 	irqSet(IRQ_KEYS,RutAtencionTeclado);
 	irqSet(IRQ_TIMER0,RutAtencionTempo);
 }
-

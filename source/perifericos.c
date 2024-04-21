@@ -119,3 +119,5 @@ void PararTempo()
 	TIMER0_CNT=TIMER0_CNT & 0x0ffffffBf;
 	
 }
+
+
