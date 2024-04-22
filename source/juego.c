@@ -84,12 +84,10 @@ void juego()
 			visualizarFondoDos();
 			if (teclaAPulsarSeleccionada== false){
 				teclaAPulsar= teclaAlAzar();
-				printf("NUEVA TECLA ELEGIDA: %d", &teclaAPulsar);
 				teclaAPulsarSeleccionada=true;
 			}	
 
 			printf("%s", nombreTecla(teclaAPulsar));
-
 
 			while(!TeclaDetectada() || !(TeclaPulsada()==teclaAPulsar)) {
 				;
@@ -101,7 +99,8 @@ void juego()
 		}
 
 		if (ESTADO==FIN){
-			ESTADO=MENU;
+			visualizarEstateFin();
+			//ESTADO=MENU;
 		}
 	}
 	// Valorar si hay que inhibir las interrupciones
