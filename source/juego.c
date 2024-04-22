@@ -29,6 +29,7 @@ bool teclaAPulsarSeleccionada;
 touchPosition pos_pantalla;
 
 int teclaAlAzar();
+char* nombreTecla();
 
 void juego()
 {	
@@ -43,7 +44,6 @@ void juego()
 
 /* Si se quiere visualizar el valor de una variable escribir %d dentro de las comillas y el nombre de la variable fuera de las comillas */
 	iprintf("\x1b[23;5HProbando la escritura con variable. Valor=%d", i);
-	visualizarPantallaJugar();
 
 			iprintf("\x1b[10;3HValor horizontal de pos_pantalla: %d", pos_pantalla.px);						
 			iprintf("\x1b[14;3HValor vertical de pos_pantalla: %d", pos_pantalla.py);						
@@ -54,6 +54,7 @@ void juego()
 	{	
 		if (ESTADO==MENU) 
 		{	
+			visualizarPantallaJugar();
 			// Encuestamos a la pantalla: No nos interesa abandonar esta encuesta hasta que se presione el botón.
 			touchRead(&pos_pantalla); // lectura de la posición
 
@@ -82,55 +83,91 @@ void juego()
 			teclaAPulsarSeleccionada = false;
 			visualizarFondoDos();
 			if (teclaAPulsarSeleccionada== false){
-				int teclaAPulsar= teclaAlAzar();
-	
-			teclaAPulsarSeleccionada=true;
+				teclaAPulsar= teclaAlAzar();
+				printf("NUEVA TECLA ELEGIDA: %d", &teclaAPulsar);
+				teclaAPulsarSeleccionada=true;
 			}	
 
-			if(!(TeclaPulsada()==teclaAPulsar)){
-				ESTADO=FIN;
+			printf("%s", nombreTecla(teclaAPulsar));
+
+
+			while(!TeclaDetectada() || !(TeclaPulsada()==teclaAPulsar)) {
+				;
 			}
+				ESTADO=FIN;
+	
+			
 
 		}
-		if (ESTADO==FIN){
-			while (true) {
 
-			}
+		if (ESTADO==FIN){
 			ESTADO=MENU;
 		}
 	}
 	// Valorar si hay que inhibir las interrupciones
 }
 
-// Elige un valor al azar del 0 al 7
+// Elige un valor al azar del 0 al 7, y devuelve la tecla correspondiente entre las posibilidades para el juego
 int teclaAlAzar() {
 	int valorAzar = rand() % 8;
-			switch (valorAzar){
-				case 0:
-					return A;
-					break;
-				case 1:
-					return B;
-					break;
-				case 2:
-					return DERECHA;
-					break;
-				case 3:
-					return IZQUIERDA;
-					break;
-				case 4:
-					return ARRIBA;
-					break;
-				case 5:
-					return ABAJO;
-					break;
-				case 6:
-					return R;
-					break;
-				case 7:
-					return L;	
-					break;
-				default:
-					break;
-			}
+	switch (valorAzar){
+		case 0:
+			return A;
+			break;
+		case 1:
+			return B;
+			break;
+		case 2:
+			return DERECHA;
+			break;
+		case 3:
+			return IZQUIERDA;
+			break;
+		case 4:
+			return ARRIBA;
+			break;
+		case 5:
+			return ABAJO;
+			break;
+		case 6:
+			return R;
+			break;
+		case 7:
+			return L;	
+			break;
+		default:
+			break;
+	}
 }
+
+// Dado un valor de tecla, devuelve el nombre de la tecla en un string
+char* nombreTecla(int tecla) {
+	switch(tecla) {
+		case A:
+			return "A";
+			break;
+		case B:
+			return "B";
+			break;
+		case DERECHA:
+			return "Derecha";
+			break;
+		case IZQUIERDA:
+			return "Izquierda";
+			break;
+		case ARRIBA:
+			return "Arriba";
+			break;
+		case ABAJO:
+			return "Abajo";
+			break;
+		case R:
+			return "R";
+			break;
+		case L:
+			return "L";
+			break;
+		default:
+			break;
+	}
+};
