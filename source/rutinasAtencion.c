@@ -19,6 +19,7 @@ void RutAtencionTeclado ()
 
 			ESTADO=PAUSA;
 			PararTempo;
+	}
 	if(ESTADO == PAUSA && TeclaPulsada == START){
 
 			ESTADO=JUEGO;
