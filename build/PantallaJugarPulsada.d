@@ -1,0 +1,1 @@
+PantallaJugarPulsada.o: PantallaJugarPulsada.s

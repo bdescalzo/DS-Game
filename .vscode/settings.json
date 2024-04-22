@@ -1,5 +1,10 @@
 {
     "files.associations": {
-        "definiciones.h": "c"
+        "definiciones.h": "c",
+        "perifericos.h": "c",
+        "rutinasatencion.h": "c",
+        "stdio.h": "c",
+        "stdlib.h": "c",
+        "puertaabierta.h": "c"
     }
 }

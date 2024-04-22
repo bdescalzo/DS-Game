@@ -1,4 +1,3 @@
-
 #include <nds.h> 		
 #include <stdio.h>		
 #include <stdlib.h>		
@@ -12,7 +11,8 @@
 #include "FondoDos.h"
 #include "Puerta.h"
 #include "PuertaAbierta.h"
-
+#include "PantallaJugar.h"
+#include "PantallaJugarPulsada.h"
 
 /* Se elige el canal de DMA que se utilizará para copiar las imágenes en memoria */
 static const int DMA_CHANNEL = 3;
@@ -25,6 +25,22 @@ void visualizarFondoUno() {
                      FondoUnoBitmap, /* Variable que se genera automáticamente */
                      (uint16 *)BG_BMP_RAM(0), /* Dirección del fondo principal */
                      FondoUnoBitmapLen); /* Longitud en bytes, variable que se genera automáticamente */
+}
+
+void visualizarPantallaJugarPulsada() {
+	
+	dmaCopyHalfWords(DMA_CHANNEL,
+                     PantallaJugarPulsadaBitmap, /* Variable que se genera automáticamente */
+                     (uint16 *)BG_BMP_RAM(0), /* Dirección del fondo principal */
+                     PantallaJugarPulsadaBitmapLen); /* Longitud en bytes, variable que se genera automáticamente */
+}
+
+void visualizarPantallaJugar() {
+	
+	dmaCopyHalfWords(DMA_CHANNEL,
+                     PantallaJugarBitmap, /* Variable que se genera automáticamente */
+                     (uint16 *)BG_BMP_RAM(0), /* Dirección del fondo principal */
+                     PantallaJugarBitmapLen); /* Longitud en bytes, variable que se genera automáticamente */
 }
 
 void visualizarFondoDos() {

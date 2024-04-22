@@ -8,6 +8,7 @@ rutinasAtencion.c
 #include "perifericos.h"
 #include "fondos.h"
 #include "sprites.h"
+#include "juego.h"
 
 int ESTADO; // Para controlar el estado del autómata en que esté
 int seg3;   // Para ver si pasan tres segundos
@@ -18,6 +19,7 @@ void RutAtencionTeclado ()
 
 			ESTADO=PAUSA;
 			PararTempo;
+	}
 	if(ESTADO == PAUSA && TeclaPulsada == START){
 
 			ESTADO=JUEGO;
@@ -45,8 +47,8 @@ void RutAtencionTempo()
 if (ESTADO==JUEGO)
 {
 	temp=temp+0.05; 
-	if (temp==tiempo && !(teclaPulsada()==teclaAPulsar)){
-		ESTADO=Final;
+	if (temp==tiempo && !(TeclaPulsada()==teclaAPulsar)){
+		ESTADO=FIN;
 		PararTempo();
 		temp = 0;
 		tiempo =tiempo * 0.95;

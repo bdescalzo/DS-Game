@@ -1,0 +1,1 @@
+PantallaJugar.o: PantallaJugar.s
