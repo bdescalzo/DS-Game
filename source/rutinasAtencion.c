@@ -18,12 +18,11 @@ void RutAtencionTeclado ()
 	if(ESTADO == JUEGO && TeclaPulsada == START){
 
 			ESTADO=PAUSA;
-			PararTempo;
-	}
+			PararTempo();
 	if(ESTADO == PAUSA && TeclaPulsada == START){
 
 			ESTADO=JUEGO;
-			PonerEnMarchaTempo;
+			PonerEnMarchaTempo();
 	}
 //if (ESTADO == CERRADA)
 //{	
@@ -36,7 +35,8 @@ void RutAtencionTeclado ()
 //		MostrarRomboGrande(2, 100, 100);
 //	}
 //}
-}
+
+	}}
 
 void RutAtencionTempo()
 {
