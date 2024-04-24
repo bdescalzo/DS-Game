@@ -15,46 +15,45 @@ int seg3;   // Para ver si pasan tres segundos
 
 void RutAtencionTeclado ()
 {
-	if(ESTADO == JUEGO && TeclaPulsada == START){
-
+	// En esta función vamos a tratar las posibilidades de presionar la tecla correcta o la tecla incorrecta en el ciclo de juego
+	if(ESTADO == JUEGO && TeclaPulsada() == START){
 			ESTADO=PAUSA;
 			PararTempo();
+	}
+	else if (ESTADO==JUEGO && TeclaPulsada()==teclaAPulsar) {
+		printf("VICTORIA");
+	}
+	else if (ESTADO == JUEGO && TeclaPulsada()!=teclaAPulsar) {
+			ESTADO=MENU;
+	}
+
 	if(ESTADO == PAUSA && TeclaPulsada == START){
 
 			ESTADO=JUEGO;
 			PonerEnMarchaTempo();
 	}
-//if (ESTADO == CERRADA)
-//{	
-//	if (TeclaPulsada()==A)
-//	{
-//		ESTADO=ABIERTA;
-//		visualizarPuertaAbierta();
-//		seg3=0;
-//		MostrarRombo(1, 5, 5);
-//		MostrarRomboGrande(2, 100, 100);
-//	}
-//}
 
-	}}
+	}
 
 void RutAtencionTempo()
 {
 	static int tick=0;
 	static int seg=0;
-	
+	if (ESTADO==JUEGO)
+	{
+		printf("\x1b[6;3HTEMP_PRESUM: %f", &temp);	
+		temp=temp+0.005;
+		printf("\x1b[8;3HTEMP_POSTSUM: %f", &temp);	
 
-if (ESTADO==JUEGO)
-{
-	temp=temp+0.05; 
-	if (temp==tiempo && !(TeclaPulsada()==teclaAPulsar)){
-		ESTADO=FIN;
-		PararTempo();
-		temp = 0;
-		tiempo =tiempo * 0.95;
+		if (temp>=tiempo && !(TeclaDetectada() && (TeclaPulsada()==teclaAPulsar))){
+			ESTADO=MENU;
+		printf("\x1b[8;3HjejejejejeTEMP_POSTSUM: %f", &temp);	
+			PararTempo();
+			temp = 0;
+			tiempo =tiempo * 0.95;
+		}
+		
 	}
-	
-}
 	
 }
 
