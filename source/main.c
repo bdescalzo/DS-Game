@@ -19,11 +19,13 @@ y en otro ejemplo de Jaeden Ameronen
 //---------------------------------------------------------------------------------
 int main(void) {
 //---------------------------------------------------------------------------------
-
 	inicializarGraficosSprites();
 	HabilitarInterrupciones();
-	ConfigurarTemporizador(39322,1); //para 20 ticks/sec
+	ConfigurarTemporizador(13108, 64); // 10 ticks / seg
 	ConfigurarTeclado(0x0C);
+	InhibirIntTempo();
+	EstablecerVectorInt();
+
 	// Llamada al juego que vosotros programaréis
 	juego();
 
