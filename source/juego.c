@@ -23,6 +23,7 @@ int puntuacion = 0;
 double tiempo = 3;
 double temp = 0;
 int teclaAPulsar;
+int teclaInputteada;
 bool encontrado;
 bool teclaAPulsarSeleccionada;
 
@@ -30,6 +31,7 @@ touchPosition pos_pantalla;
 
 int teclaAlAzar();
 char* nombreTecla();
+void inicializarValores();
 
 void juego()
 {	
@@ -39,7 +41,6 @@ void juego()
 
 	ESTADO=MENU;
 	
-	// Escribe en la fila 22 columna 5 de la pantalla	
 	iprintf("\x1b[22;5HProbando la pantalla de texto");						
 
 	touchRead(&pos_pantalla); // Primera lectura de la pantalla para establecer valores iniciales
@@ -48,6 +49,9 @@ void juego()
 	{	
 		if (ESTADO==MENU) 
 		{	
+			if (TeclaDetectada()) {
+				iprintf("\x1b[22;5HUOU");
+			}
 			visualizarPantallaJugar();
 
 			// La pantalla MENÚ incluye un solo botón, el de jugar. Se encuentra entre los píxeles (55, 205) y (99, 161), por lo que encuestamos a la pantalla continuamente hasta que se presione dicho botón.
@@ -69,37 +73,62 @@ void juego()
 			// Habilitamos el temporizador para el juego y comenzamos.
 			HabilitarIntTempo();
 			PonerEnMarchaTempo();
+			inicializarValores();
 			ESTADO=JUEGO;
 		}
 		if (ESTADO==JUEGO)
 		{
-			encontrado = false;
+			// Inicializamos las variables del salto de estado
 			visualizarFondoDos();
-			// Si aún no se ha elegido una tecla (que será el caso al comenzar cada ronda) cogemos una al azar, y la dejamos fija. De ahí en adelante, el estado se trata en rutinasAtencion.
-			if (teclaAPulsarSeleccionada== false){
-				teclaAPulsar= teclaAlAzar();
-				printf("NUEVA TECLA ELEGIDA: %d", &teclaAPulsar);
-				teclaAPulsarSeleccionada=true;
-			}	
+			if (!teclaAPulsarSeleccionada) {
+				teclaInputteada = -1;
+				teclaAPulsar = teclaAlAzar();
+				char* nombreNuevaTecla = nombreTecla(teclaAPulsar);
+				printf("TECLA NUEVA: %s", nombreNuevaTecla);
+				teclaAPulsarSeleccionada = true;
+			
+			if (teclaAPulsarSeleccionada) {
+				if (temp >= tiempo && !encontrado) {
+					ESTADO = MENU;
+					teclaAPulsarSeleccionada = false;
+				}
 
-			printf("%s", nombreTecla(teclaAPulsar));
+				if (TeclaDetectada() && temp < tiempo && teclaInputteada==-1) { 
+					printf("jejeje");
+					teclaInputteada = TeclaPulsada();
+					teclaAPulsarSeleccionada = false;
+					if (teclaInputteada != teclaAPulsar) {
+						ESTADO = MENU;
+					}
+					else {
+						printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+					}
+				}
+
+			}
+			//if (ESTADO==JUEGO) {
+			//	teclaAPulsar= teclaAlAzar();
+			//	printf("NUEVA TECLA ELEGIDA:%d", &teclaAPulsar);
+			//	teclaAPulsarSeleccionada=true;
+			//}	
+		}
+
+			//printf("%s", nombreTecla(teclaAPulsar));
 		}
 
 		if (ESTADO==FIN){
 			ESTADO=MENU;
 		}
 	}
-	// Valorar si hay que inhibir las interrupciones
 }
-
 // Elige un valor al azar del 0 al 7, y devuelve la tecla correspondiente entre las posibilidades para el juego
 int teclaAlAzar() {
 	int valorAzar = rand() % 8;
 	switch (valorAzar){
 		case 0:
-			return A;
 			break;
 		case 1:
+			return A;
 			return B;
 			break;
 		case 2:
@@ -156,3 +185,12 @@ char* nombreTecla(int tecla) {
 			break;
 	}
 };
+
+// Restablece los valores de la partida a su estado inicial
+void inicializarValores() {
+	velocidad = 1;
+	encontrado = false;
+	puntuacion = 0;
+	tiempo = 3.0;
+	temp = 0.0;
+}

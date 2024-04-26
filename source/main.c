@@ -22,7 +22,7 @@ int main(void) {
 	inicializarGraficosSprites();
 	HabilitarInterrupciones();
 	ConfigurarTemporizador(13108, 64); // 10 ticks / seg
-	ConfigurarTeclado(0x0C);
+	ConfigurarTeclado(0xFFFFFFFF);
 	InhibirIntTempo();
 	EstablecerVectorInt();
 
