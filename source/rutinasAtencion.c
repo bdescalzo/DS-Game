@@ -8,42 +8,49 @@ rutinasAtencion.c
 #include "perifericos.h"
 #include "fondos.h"
 #include "sprites.h"
+#include "juego.h"
 
 int ESTADO; // Para controlar el estado del autómata en que esté
 int seg3;   // Para ver si pasan tres segundos
 
 void RutAtencionTeclado ()
 {
-//if (ESTADO == CERRADA)
-//{	
-//	if (TeclaPulsada()==A)
-//	{
-//		ESTADO=ABIERTA;
-//		visualizarPuertaAbierta();
-//		seg3=0;
-//		MostrarRombo(1, 5, 5);
-//		MostrarRomboGrande(2, 100, 100);
-//	}
-//}
+	if (ESTADO == JUEGO) {
+		printf("jejeje");
+		if (TeclaPulsada()==START) {
+			ESTADO = MENU;
+			PararTempo();
+			InhibirIntTempo();
+		}
+		else {
+			PararTempo();
+		}
+	}
 }
 
 void RutAtencionTempo()
 {
 	static int tick=0;
 	static int seg=0;
-	
+	if (ESTADO==JUEGO)
+	{
+		tick++;
+		iprintf("\x1b[2;3H%d", tick);	
 
-if (ESTADO==JUEGO)
-{
-	temp=temp+0.05; 
-	if (temp==tiempo && !(teclaPulsada()==teclaAPulsar)){
-		ESTADO=Final;
-		PararTempo();
-		temp = 0;
-		tiempo =tiempo * 0.95;
+		//printf("\x1b[6;3HTEMP_PRESUM: %f", &temp);	
+		temp=temp+0.005;
+		//printf("\x1b[8;3HTEMP_POSTSUM: %f", &temp);	
+
+		if (temp>=tiempo && !(TeclaDetectada() && (TeclaPulsada()==teclaAPulsar))){
+			ESTADO=MENU;
+		//printf("\x1b[8;3HjejejejejeTEMP_POSTSUM: %f", &temp);	
+			PararTempo();
+			InhibirIntTempo();
+			temp = 0;
+			tiempo =tiempo * 0.95;
+		}
+		
 	}
-	
-}
 	
 }
 
@@ -53,4 +60,3 @@ void EstablecerVectorInt()
 	irqSet(IRQ_KEYS,RutAtencionTeclado);
 	irqSet(IRQ_TIMER0,RutAtencionTempo);
 }
-

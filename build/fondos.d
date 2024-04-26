@@ -52,7 +52,9 @@ fondos.o: /home/user/SharedFiles/ProyectoEC/EC/source/fondos.c \
   /home/user/SharedFiles/ProyectoEC/EC/build/FondoUno.h \
   /home/user/SharedFiles/ProyectoEC/EC/build/FondoDos.h \
   /home/user/SharedFiles/ProyectoEC/EC/build/Puerta.h \
-  /home/user/SharedFiles/ProyectoEC/EC/build/PuertaAbierta.h
+  /home/user/SharedFiles/ProyectoEC/EC/build/PuertaAbierta.h \
+  /home/user/SharedFiles/ProyectoEC/EC/build/PantallaJugar.h \
+  /home/user/SharedFiles/ProyectoEC/EC/build/PantallaJugarPulsada.h
 
 /opt/devkitPro/libnds/include/nds.h:
 
@@ -161,3 +163,7 @@ fondos.o: /home/user/SharedFiles/ProyectoEC/EC/source/fondos.c \
 /home/user/SharedFiles/ProyectoEC/EC/build/Puerta.h:
 
 /home/user/SharedFiles/ProyectoEC/EC/build/PuertaAbierta.h:
+
+/home/user/SharedFiles/ProyectoEC/EC/build/PantallaJugar.h:
+
+/home/user/SharedFiles/ProyectoEC/EC/build/PantallaJugarPulsada.h:
