@@ -21,8 +21,9 @@ int main(void) {
 //---------------------------------------------------------------------------------
 	inicializarGraficosSprites();
 	HabilitarInterrupciones();
+	HabilitarIntTeclado();
 	ConfigurarTemporizador(13108, 64); // 10 ticks / seg
-	ConfigurarTeclado(0xFFFFFFFF);
+	ConfigurarTeclado(0x400C);
 	InhibirIntTempo();
 	EstablecerVectorInt();
 

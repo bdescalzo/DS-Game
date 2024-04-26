@@ -49,9 +49,6 @@ void juego()
 	{	
 		if (ESTADO==MENU) 
 		{	
-			if (TeclaDetectada()) {
-				iprintf("\x1b[22;5HUOU");
-			}
 			visualizarPantallaJugar();
 
 			// La pantalla MENÚ incluye un solo botón, el de jugar. Se encuentra entre los píxeles (55, 205) y (99, 161), por lo que encuestamos a la pantalla continuamente hasta que se presione dicho botón.
@@ -97,14 +94,20 @@ void juego()
 					printf("jejeje");
 					teclaInputteada = TeclaPulsada();
 					teclaAPulsarSeleccionada = false;
+				}
+
+				if (teclaInputteada != -1) {
+
 					if (teclaInputteada != teclaAPulsar) {
 						ESTADO = MENU;
 					}
 					else {
-						printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+						puntuacion++;
+						printf("Puntuacion: %d", puntuacion);
+						teclaAPulsarSeleccionada = false;
+						tiempo=tiempo*0.95;
 					}
 				}
-
 			}
 			//if (ESTADO==JUEGO) {
 			//	teclaAPulsar= teclaAlAzar();
@@ -114,10 +117,6 @@ void juego()
 		}
 
 			//printf("%s", nombreTecla(teclaAPulsar));
-		}
-
-		if (ESTADO==FIN){
-			ESTADO=MENU;
 		}
 	}
 }
