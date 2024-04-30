@@ -32,6 +32,7 @@ touchPosition pos_pantalla;
 int teclaAlAzar();
 char* nombreTecla();
 void inicializarValores();
+void siguienteRonda();
 
 void juego()
 {	
@@ -49,9 +50,6 @@ void juego()
 	{	
 		if (ESTADO==MENU) 
 		{	
-			if (TeclaDetectada()) {
-				iprintf("\x1b[22;5HUOU");
-			}
 			visualizarPantallaJugar();
 
 			// La pantalla MENÚ incluye un solo botón, el de jugar. Se encuentra entre los píxeles (55, 205) y (99, 161), por lo que encuestamos a la pantalla continuamente hasta que se presione dicho botón.
@@ -71,41 +69,61 @@ void juego()
 			}
 
 			// Habilitamos el temporizador para el juego y comenzamos.
+			HabilitarIntTeclado();
 			HabilitarIntTempo();
 			PonerEnMarchaTempo();
 			inicializarValores();
 			ESTADO=JUEGO;
+
 		}
 		if (ESTADO==JUEGO)
 		{
 			// Inicializamos las variables del salto de estado
 			visualizarFondoDos();
-			if (!teclaAPulsarSeleccionada) {
-				teclaInputteada = -1;
-				teclaAPulsar = teclaAlAzar();
-				char* nombreNuevaTecla = nombreTecla(teclaAPulsar);
-				printf("TECLA NUEVA: %s", nombreNuevaTecla);
-				teclaAPulsarSeleccionada = true;
-			
+			// Si estamos en un ciclo de juego que ya ha comenzado
 			if (teclaAPulsarSeleccionada) {
+				// Perdemos si ha pasado el tiempo sin presionar el botón
 				if (temp >= tiempo && !encontrado) {
+					printf("Hemos perdido por no encontrar la tecla fuera de tiempo");
 					ESTADO = MENU;
-					teclaAPulsarSeleccionada = false;
 				}
 
-				if (TeclaDetectada() && temp < tiempo && teclaInputteada==-1) { 
-					printf("jejeje");
+				// Si se detecta el primer input de la ronda (es decir, teclaInputteada=-1), se almacena
+				if (TeclaDetectada() && temp < tiempo && teclaInputteada==-1) {
 					teclaInputteada = TeclaPulsada();
-					teclaAPulsarSeleccionada = false;
-					if (teclaInputteada != teclaAPulsar) {
-						ESTADO = MENU;
+
+					// Si la tecla pulsada es START o SELECT, la ignoramos en el bucle de juego
+					if (teclaInputteada != START && teclaInputteada != SELECT) {
+						teclaAPulsarSeleccionada = false;
+												printf("SE uwu ESPERABA LA TECLA %d", teclaAPulsar);
+							printf("SE uwu HA RECIBIDO LA TECLA %d", teclaInputteada);
+
+						// En función de si se ha pulsado la tecla correcta, se pasa a la siguiente ronda o se pierde el juego
+						if (teclaInputteada != teclaAPulsar) {
+							//consoleClear();
+							//printf("SE ESPERABA LA TECLA %d", teclaAPulsar);
+							//printf("SE HA RECIBIDO LA TECLA %d", teclaInputteada);
+							InhibirIntTeclado();
+							InhibirIntTempo();
+							PararTempo();
+							ESTADO = MENU;
+						}
+						else {
+							printf("Se ha encontrado la tecla a tiempo.");
+							siguienteRonda();
+						}
 					}
 					else {
-						printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+						teclaInputteada = -1;
 					}
 				}
-
 			}
+			else if (!teclaAPulsarSeleccionada) {
+				seleccionarTecla();
+				printf("CAE NUEVA: %s", nombreTecla(teclaAPulsar));
+			}
+
+
 			//if (ESTADO==JUEGO) {
 			//	teclaAPulsar= teclaAlAzar();
 			//	printf("NUEVA TECLA ELEGIDA:%d", &teclaAPulsar);
@@ -114,21 +132,20 @@ void juego()
 		}
 
 			//printf("%s", nombreTecla(teclaAPulsar));
-		}
 
 		if (ESTADO==FIN){
 			ESTADO=MENU;
 		}
 	}
 }
-// Elige un valor al azar del 0 al 7, y devuelve la tecla correspondiente entre las posibilidades para el juego
+// Elige una tecla al azar
 int teclaAlAzar() {
 	int valorAzar = rand() % 8;
 	switch (valorAzar){
 		case 0:
+			return A;
 			break;
 		case 1:
-			return A;
 			return B;
 			break;
 		case 2:
@@ -182,6 +199,7 @@ char* nombreTecla(int tecla) {
 			return "L";
 			break;
 		default:
+			return "INCORRECTA";
 			break;
 	}
 };
@@ -193,4 +211,23 @@ void inicializarValores() {
 	puntuacion = 0;
 	tiempo = 3.0;
 	temp = 0.0;
+	teclaAPulsarSeleccionada = false;
+}
+
+// Actualiza los valores al saltar en una ronda satisfactoria
+void siguienteRonda() {
+	printf("AAAAAAAAAAAAAAAAAAPIOARJGOPERIGHOERIGNEORFIGKEORFIGKEORFGJIKEROFGIJEROFPIJGEORPDFJEGRPDJOGERPODFJ");
+	puntuacion++;
+	printf("Puntuacion: %d", puntuacion);
+	teclaInputteada = -1;
+	encontrado = false;
+}
+
+// Selecciona la siguiente tecla aleatoria para el juego, y la imprime en pantalla
+void seleccionarTecla() {
+	teclaInputteada = -1;
+	teclaAPulsar = teclaAlAzar();
+	char* nombreNuevaTecla = nombreTecla(teclaAPulsar);
+	iprintf("\x1b[22;5HTECLA NUEVA: %s, de valor %d", nombreNuevaTecla, teclaAPulsar);
+	teclaAPulsarSeleccionada = true;
 }
