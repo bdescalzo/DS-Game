@@ -18,12 +18,10 @@ void RutAtencionTeclado ()
 	if (ESTADO == JUEGO) {
 		printf("jejeje");
 		if (TeclaPulsada()==START) {
+			printf("UUUUF");
 			ESTADO = MENU;
 			PararTempo();
 			InhibirIntTempo();
-		}
-		else {
-			PararTempo();
 		}
 	}
 }
@@ -33,23 +31,15 @@ void RutAtencionTempo()
 	static int tick=0;
 	static int seg=0;
 	if (ESTADO==JUEGO)
-	{
-		tick++;
-		iprintf("\x1b[2;3H%d", tick);	
-
-		//printf("\x1b[6;3HTEMP_PRESUM: %f", &temp);	
-		temp=temp+0.005;
-		//printf("\x1b[8;3HTEMP_POSTSUM: %f", &temp);	
-
-		if (temp>=tiempo && !(TeclaDetectada() && (TeclaPulsada()==teclaAPulsar))){
+	{	
+		temp=temp+0.05;
+		if (temp>=tiempo){
 			ESTADO=MENU;
-		//printf("\x1b[8;3HjejejejejeTEMP_POSTSUM: %f", &temp);	
-			PararTempo();
-			InhibirIntTempo();
-			temp = 0;
-			tiempo =tiempo * 0.95;
+			inhibirIntTempo();
+			inhibirIntTeclado();
+			temp=0;
+			pararTempo();
 		}
-		
 	}
 	
 }
