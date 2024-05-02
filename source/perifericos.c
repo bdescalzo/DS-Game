@@ -62,7 +62,7 @@ void HabilitarIntTeclado()
 	// y después volver a habilitar las interrupciones de forma general 
 	IME=0;
         // ESCRIBID AQUÍ VUESTRO CÓDIGO
-	IE=IE | 0x0800;
+	IE=IE | 0x1000;
 	
 	IME=1;
 }
@@ -76,7 +76,7 @@ void InhibirIntTeclado()
 
 	IME=0;
 	// ESCRIBID AQUÍ VUESTRO CÓDIGO
-	IE=IE & 0xfffff7ff;
+	IE=IE & 0xffffEfff;
 
 	IME=1;
 }  
@@ -90,7 +90,7 @@ void HabilitarIntTempo()
 	// y después volver a habilitar las interrupciones de forma general 
 	IME=0;
 	// ESCRIBID AQUÍ VUESTRO CÓDIGO
-	IE=IE | 0x04;
+	IE=IE | 0x08;
 	IME=1;
 }
 
@@ -102,7 +102,7 @@ void InhibirIntTempo()
 	// y después volver a habilitar las interrupciones de forma general 
 	IME=0;
 	// ESCRIBID AQUÍ VUESTRO CÓDIGO
-	IE=IE & 0xfffffffB;
+	IE=IE & 0xfffffff7;
 	IME=1;
 
 }
@@ -110,13 +110,13 @@ void InhibirIntTempo()
 void PonerEnMarchaTempo()
 {
 	// ESCRIBID AQUÍ VUESTRO CÓDIGO
-	TIMER0_CNT=TIMER0_CNT | 0X040;
+	TIMER0_CNT=TIMER0_CNT | 0X80;
 }
 
 void PararTempo()
 {
 	// ESCRIBID AQUÍ VUESTRO CÓDIGO
-	TIMER0_CNT=TIMER0_CNT & 0x0ffffffBf;
+	TIMER0_CNT=TIMER0_CNT & 0x0ffffff7f;
 	
 }
 
