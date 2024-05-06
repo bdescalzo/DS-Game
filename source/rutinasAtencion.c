@@ -12,16 +12,25 @@ rutinasAtencion.c
 
 int ESTADO; // Para controlar el estado del autómata en que esté
 int seg3;   // Para ver si pasan tres segundos
+int save;	// Para guardar el temporizador;
 
 void RutAtencionTeclado ()
 {
-	if (ESTADO == JUEGO) {
+	if (ESTADO == JUEGO || ESTADO == PAUSA) {
 		printf("jejeje");
-		if (TeclaPulsada()==START) {
-			printf("UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUF");
+		if (TeclaPulsada() == SELECT) {
+			printf("UUUUF");
 			ESTADO = MENU;
 			PararTempo();
 			InhibirIntTempo();
+		}
+		if (ESTADO == JUEGO && TeclaPulsada() == START) {
+			ESTADO = PAUSA;
+			PararTempo();
+		}
+		if (ESTADO == PAUSA && TeclaPulsada() == START){
+			ESTADO = JUEGO;
+			PonerEnMarchaTempo();
 		}
 	}
 }
