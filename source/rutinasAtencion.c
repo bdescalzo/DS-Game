@@ -35,11 +35,9 @@ void RutAtencionTempo()
 		tick++;
 		iprintf("\x1b[2;3H%d", tick);	
 		temp=temp+0.005;
-		}
-		
-	}
-	
-}
+	}		
+}	
+
 
 void EstablecerVectorInt()
 {
