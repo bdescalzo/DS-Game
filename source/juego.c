@@ -23,6 +23,7 @@ int puntuacion = 0;
 double tiempo = 3;
 double temp = 0;
 int teclaAPulsar;
+int teclaInputteada;
 bool encontrado;
 bool teclaAPulsarSeleccionada;
 
@@ -30,84 +31,116 @@ touchPosition pos_pantalla;
 
 int teclaAlAzar();
 char* nombreTecla();
+void inicializarValores();
+void siguienteRonda();
 
 void juego()
 {	
 	// Definiciones de variables
 	int i=9;
-	int tecla=0;;
+	int tecla=0;
 
 	ESTADO=MENU;
 	
-	// Escribe en la fila 22 columna 5 de la pantalla	
-	iprintf("\x1b[22;5HProbando la pantalla de texto");						
-
-/* Si se quiere visualizar el valor de una variable escribir %d dentro de las comillas y el nombre de la variable fuera de las comillas */
-	iprintf("\x1b[23;5HProbando la escritura con variable. Valor=%d", i);
-
-			iprintf("\x1b[10;3HValor horizontal de pos_pantalla: %d", pos_pantalla.px);						
-			iprintf("\x1b[14;3HValor vertical de pos_pantalla: %d", pos_pantalla.py);						
-
 	touchRead(&pos_pantalla); // Primera lectura de la pantalla para establecer valores iniciales
 
+	// BUCLE PRINCIPAL DE JUEGO: Controla la máquina de estados
 	while(1)
 	{	
 		if (ESTADO==MENU) 
 		{	
 			visualizarPantallaJugar();
-			// Encuestamos a la pantalla: No nos interesa abandonar esta encuesta hasta que se presione el botón.
-			touchRead(&pos_pantalla); // lectura de la posición
+
+			// SECCION: Botón de jugar.
+
+			// La pantalla MENÚ incluye un solo botón, el de jugar. Se encuentra entre los píxeles (55, 205) y (99, 161), por lo que encuestamos a la pantalla continuamente hasta que se presione dicho botón.
+			touchRead(&pos_pantalla);
 
 			// Revisamos por encuesta que no se haya presionado el área del botón
  			while(!((55<=pos_pantalla.px && pos_pantalla.px<=205)) || !(99<=pos_pantalla.py && pos_pantalla.py<=161)) { // encuesta
 				touchRead(&pos_pantalla); // lectura de la posición
-				iprintf("\x1b[10;3HValor horizontal de pos_pantalla: %d", pos_pantalla.px);						
-				iprintf("\x1b[14;3HValor vertical de pos_pantalla: %d", pos_pantalla.py);						
 			}
-
-			// Una vez se ha pulsado, nos mantenemos en este estado hasta que deje de pulsarse
+			// Una vez pulsado el botón, cambiamos al fondo de botón presionado, que se va a mantener mientras el lápiz esté en la pantalla.
 			visualizarPantallaJugarPulsada();
 			touchRead(&pos_pantalla);
 
+			// Nos mantenemos en este estado hasta que el lápiz deje de presionar la pantalla.
  			while(((pos_pantalla.px!=0 && pos_pantalla.py!=0))) {
 				touchRead(&pos_pantalla);
 			}
-			iprintf("\x1b[22;5HPASAMOS AL ESTADO JUEGO POR LOS VALORES %d y %d", pos_pantalla.px, pos_pantalla.py);						
 
-			ESTADO=JUEGO;
+			// Habilitamos el temporizador para el juego, establecemos los valores iniciales de partida y comenzamos.
+			HabilitarIntTeclado();
+			HabilitarIntTempo();
 			PonerEnMarchaTempo();
+			inicializarValores();
+			ESTADO=JUEGO;
+
 		}
 		if (ESTADO==JUEGO)
 		{
-			encontrado = false;
-			teclaAPulsarSeleccionada = false;
+			// TODO: Cambiar esto por una función que muestre el fondo correcto, según la tecla que haya que pulsar.
+
 			visualizarFondoDos();
-			if (teclaAPulsarSeleccionada== false){
-				teclaAPulsar= teclaAlAzar();
-				printf("NUEVA TECLA ELEGIDA: %d", &teclaAPulsar);
-				teclaAPulsarSeleccionada=true;
-			}	
 
-			printf("%s", nombreTecla(teclaAPulsar));
-
-
-			while(!TeclaDetectada() || !(TeclaPulsada()==teclaAPulsar)) {
-				;
+			if (!teclaAPulsarSeleccionada) { // Si estamos en una nueva ronda en la que aún no hay elección de nueva tecla, se hace la elección.
+				seleccionarTecla();
+				printf("CAE NUEVA: %s", nombreTecla(teclaAPulsar));
 			}
-				ESTADO=FIN;
-	
-			
 
+			// Perdemos si ha pasado el tiempo sin presionar el botón
+			if (temp >= tiempo && !encontrado) {
+				printf("Hemos perdido por no encontrar la tecla fuera de tiempo");
+				ESTADO = MENU;
+			}
+
+			// TODO: Migrar (parte de) este bloque, si es posible / aporta ventajas, a la rutina de atención de tiempo.
+			// Si se detecta el primer input de la ronda (es decir, teclaInputteada=-1), se revisa si es la opción correcta
+			if (TeclaDetectada() && temp < tiempo && teclaInputteada==-1) {
+				teclaInputteada = TeclaPulsada();
+
+				// Si la tecla pulsada es START o SELECT, debemos ignorarla
+				if (teclaInputteada != START && teclaInputteada != SELECT) {
+					printf("SE ESPERABA LA TECLA %d\n", teclaAPulsar);
+					printf("SE HA RECIBIDO LA TECLA %d\n", teclaInputteada);
+
+					// En función de si se ha pulsado la tecla correcta, se pasa a la siguiente ronda o se pierde el juego
+					if (teclaInputteada != teclaAPulsar) {
+						//consoleClear();
+						//printf("SE ESPERABA LA TECLA %d", teclaAPulsar);
+						//printf("SE HA RECIBIDO LA TECLA %d", teclaInputteada);
+						ESTADO = MENU;
+						InhibirIntTeclado();
+						InhibirIntTempo();
+						PararTempo();
+					}
+					else {
+						printf("Se ha encontrado la tecla a tiempo.");
+						siguienteRonda();
+					}
+				}
+				else {
+					teclaInputteada = -1;
+				}
+			}
+		
+
+
+			//if (ESTADO==JUEGO) {
+			//	teclaAPulsar= teclaAlAzar();
+			//	printf("NUEVA TECLA ELEGIDA:%d", &teclaAPulsar);
+			//	teclaAPulsarSeleccionada=true;
+			//}	
 		}
+
+			//printf("%s", nombreTecla(teclaAPulsar));
 
 		if (ESTADO==FIN){
 			ESTADO=MENU;
 		}
 	}
-	// Valorar si hay que inhibir las interrupciones
 }
-
-// Elige un valor al azar del 0 al 7, y devuelve la tecla correspondiente entre las posibilidades para el juego
+// Devuelve una tecla al azar (entre: A, B, Arriba, Abajo, Izquierda, Derecha, L, R)
 int teclaAlAzar() {
 	int valorAzar = rand() % 8;
 	switch (valorAzar){
@@ -168,6 +201,45 @@ char* nombreTecla(int tecla) {
 			return "L";
 			break;
 		default:
+			return "INCORRECTA";
 			break;
 	}
 };
+
+// Restablece los valores de la partida a su estado inicial, para comenzar un nuevo juego.
+void inicializarValores() {
+	velocidad = 1;
+	encontrado = false;
+	puntuacion = 0;
+	tiempo = 3.0;
+	temp = 0.0;
+	teclaAPulsarSeleccionada = false;
+}
+
+// Actualiza los valores del juego, tras una ronda satisfactoria
+void siguienteRonda() {
+	puntuacion++;
+
+	// Permitimos un timeout a la lectura de teclas: si no, la siguiente ronda podría tomar erroneamente el input de la ronda actual
+	while (TeclaDetectada()) {
+		;
+	}
+	printf("Puntuacion: %d", puntuacion);
+
+	// Actualizamos todos los valores de control
+	temp = 0;
+	teclaInputteada = -1;
+	encontrado = false;
+	teclaAPulsarSeleccionada = false;
+	tiempo = tiempo * 0.95; // Reducimos el tiempo
+}
+
+// Selecciona la siguiente tecla aleatoria para el juego, y la imprime en pantalla
+void seleccionarTecla() {
+	teclaInputteada = -1;
+	teclaAPulsar = teclaAlAzar();
+	char* nombreNuevaTecla = nombreTecla(teclaAPulsar);
+	consoleClear();
+	iprintf("\x1b[22;5HTECLA NUEVA: %s, de valor %d\n", nombreNuevaTecla, teclaAPulsar);
+	teclaAPulsarSeleccionada = true;
+}
