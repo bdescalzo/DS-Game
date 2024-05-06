@@ -34,27 +34,8 @@ void RutAtencionTempo()
 	{
 		tick++;
 		iprintf("\x1b[2;3H%d", tick);	
-
-		//printf("\x1b[6;3HTEMP_PRESUM: %f", &temp);
-		// Si estamos en una nueva ronda, actualizamos el funcionamiento del tiempo
-		if (!teclaAPulsarSeleccionada) {
-			temp = 0;
-			tiempo = tiempo * 0.95;
-
+		temp=temp+0.005;
 		}
-		else {
-			temp=temp+0.005;
-		}
-		//printf("\x1b[8;3HTEMP_POSTSUM: %f", &temp);	
-
-
-		// if (temp>=tiempo && !(TeclaDetectada() && (TeclaPulsada()==teclaAPulsar))){
-		// 	ESTADO=MENU;
-		// 	PararTempo();
-		// 	InhibirIntTempo();
-		// 	temp = 0;
-		// 	tiempo =tiempo * 0.95;
-		// }
 		
 	}
 	
