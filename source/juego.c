@@ -54,11 +54,11 @@ void juego()
 
 			// La pantalla MENÚ incluye un solo botón, el de jugar. Se encuentra entre los píxeles (55, 205) y (99, 161), por lo que encuestamos a la pantalla continuamente hasta que se presione dicho botón.
 			touchRead(&pos_pantalla);
+
 			// Revisamos por encuesta que no se haya presionado el área del botón
  			while(!((55<=pos_pantalla.px && pos_pantalla.px<=205)) || !(99<=pos_pantalla.py && pos_pantalla.py<=161)) { // encuesta
 				touchRead(&pos_pantalla); // lectura de la posición
 			}
-
 
 			// Una vez pulsado el botón, cambiamos al fondo de botón presionado, que se va a mantener mientras el lápiz esté en la pantalla.
 			visualizarPantallaJugarPulsada();
