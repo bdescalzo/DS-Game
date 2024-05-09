@@ -33,6 +33,7 @@ int teclaAlAzar();
 char* nombreTecla();
 void inicializarValores();
 void siguienteRonda();
+void imprimirInstruccionesPantalla();
 
 void juego()
 {	
@@ -51,6 +52,7 @@ void juego()
 		{	
 			visualizarPantallaJugar();
 
+			imprimirInstruccionesPantalla();
 			// SECCION: Botón de jugar.
 
 			// La pantalla MENÚ incluye un solo botón, el de jugar. Se encuentra entre los píxeles (55, 205) y (99, 161), por lo que encuestamos a la pantalla continuamente hasta que se presione dicho botón.
@@ -242,4 +244,17 @@ void seleccionarTecla() {
 	consoleClear();
 	iprintf("\x1b[22;5HTECLA NUEVA: %s, de valor %d\n", nombreNuevaTecla, teclaAPulsar);
 	teclaAPulsarSeleccionada = true;
+}
+
+// Imprime las instrucciones de juego en la pantalla
+void imprimirInstruccionesPantalla() {
+		consoleClear();
+		iprintf("\x1b[2;3HINSTRUCCIONES DE JUEGO");
+		iprintf("\x1b[6;0HPresiona las teclas que se te, ");
+        iprintf("\x1b[8;0Hindiquen, pero hazlo a tiempo!");
+		iprintf("\x1b[10;0HSi te equivocas de tecla, o");
+        iprintf("\x1b[12;0Hpasa el tiempo y no");
+        iprintf("\x1b[14;0has acertado, perderas.");
+		iprintf("\x1b[16;0HCada tecla te dara un punto, pero...");
+		iprintf("\x1b[18;0HCuidado, entre rondas el tiempo se disminuye!");
 }
