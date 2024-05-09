@@ -1,0 +1,1 @@
+PresionaBotonCorrecto.o: PresionaBotonCorrecto.s

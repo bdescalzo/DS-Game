@@ -34,6 +34,7 @@ char* nombreTecla();
 void inicializarValores();
 void siguienteRonda();
 void imprimirInstruccionesPantalla();
+void dormir();
 
 void juego()
 {	
@@ -81,9 +82,7 @@ void juego()
 		}
 		if (ESTADO==JUEGO)
 		{
-			// TODO: Cambiar esto por una función que muestre el fondo correcto, según la tecla que haya que pulsar.
-
-			visualizarFondoDos();
+			visualizarPresionaBotonSinPulsar();
 
 			if (!teclaAPulsarSeleccionada) { // Si estamos en una nueva ronda en la que aún no hay elección de nueva tecla, se hace la elección.
 				seleccionarTecla();
@@ -93,7 +92,9 @@ void juego()
 			// Perdemos si ha pasado el tiempo sin presionar el botón
 			if (temp >= tiempo && !encontrado) {
 				printf("Hemos perdido por no encontrar la tecla fuera de tiempo");
-				ESTADO = MENU;
+				visualizarPresionaBotonIncorrecto();
+                dormir();
+                ESTADO = MENU;
 			}
 
 			// TODO: Migrar (parte de) este bloque, si es posible / aporta ventajas, a la rutina de atención de tiempo.
@@ -108,6 +109,8 @@ void juego()
 
 					// En función de si se ha pulsado la tecla correcta, se pasa a la siguiente ronda o se pierde el juego
 					if (teclaInputteada != teclaAPulsar) {
+                        visualizarPresionaBotonIncorrecto();
+                        dormir();
 						//consoleClear();
 						//printf("SE ESPERABA LA TECLA %d", teclaAPulsar);
 						//printf("SE HA RECIBIDO LA TECLA %d", teclaInputteada);
@@ -117,6 +120,8 @@ void juego()
 						PararTempo();
 					}
 					else {
+                        visualizarPresionaBotonCorrecto();
+                        dormir();
 						printf("Se ha encontrado la tecla a tiempo.");
 						siguienteRonda();
 					}
@@ -257,4 +262,14 @@ void imprimirInstruccionesPantalla() {
         iprintf("\x1b[14;0has acertado, perderas.");
 		iprintf("\x1b[16;0HCada tecla te dara un punto, pero...");
 		iprintf("\x1b[18;0HCuidado, entre rondas el tiempo se disminuye!");
+}
+
+void dormir() {
+    int tiempoDormido = 2;
+    temp = 0;
+    while (temp <= tiempoDormido) {
+        printf("%f", temp);
+        consoleClear();
+    }
+    temp = 0;
 }

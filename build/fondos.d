@@ -55,7 +55,10 @@ fondos.o: /home/user/SharedFiles/ProyectoEC/EC/source/fondos.c \
   /home/user/SharedFiles/ProyectoEC/EC/build/PuertaAbierta.h \
   /home/user/SharedFiles/ProyectoEC/EC/build/PantallaJugar.h \
   /home/user/SharedFiles/ProyectoEC/EC/build/PantallaJugarPulsada.h \
-  /home/user/SharedFiles/ProyectoEC/EC/build/EstateFin.h
+  /home/user/SharedFiles/ProyectoEC/EC/build/EstateFin.h \
+  /home/user/SharedFiles/ProyectoEC/EC/build/PresionaBotonCorrecto.h \
+  /home/user/SharedFiles/ProyectoEC/EC/build/PresionaBotonIncorrecto.h \
+  /home/user/SharedFiles/ProyectoEC/EC/build/PresionaBotonSinPulsar.h
 
 /opt/devkitPro/libnds/include/nds.h:
 
@@ -170,3 +173,9 @@ fondos.o: /home/user/SharedFiles/ProyectoEC/EC/source/fondos.c \
 /home/user/SharedFiles/ProyectoEC/EC/build/PantallaJugarPulsada.h:
 
 /home/user/SharedFiles/ProyectoEC/EC/build/EstateFin.h:
+
+/home/user/SharedFiles/ProyectoEC/EC/build/PresionaBotonCorrecto.h:
+
+/home/user/SharedFiles/ProyectoEC/EC/build/PresionaBotonIncorrecto.h:
+
+/home/user/SharedFiles/ProyectoEC/EC/build/PresionaBotonSinPulsar.h:

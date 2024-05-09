@@ -14,6 +14,9 @@
 #include "PantallaJugar.h"
 #include "PantallaJugarPulsada.h"
 #include "EstateFin.h"
+#include "PresionaBotonCorrecto.h"
+#include "PresionaBotonIncorrecto.h"
+#include "PresionaBotonSinPulsar.h"
 
 /* Se elige el canal de DMA que se utilizará para copiar las imágenes en memoria */
 static const int DMA_CHANNEL = 3;
@@ -27,6 +30,33 @@ void visualizarFondoUno() {
                      (uint16 *)BG_BMP_RAM(0), /* Dirección del fondo principal */
                      FondoUnoBitmapLen); /* Longitud en bytes, variable que se genera automáticamente */
 }
+
+
+void visualizarPresionaBotonCorrecto() {
+
+    dmaCopyHalfWords(DMA_CHANNEL,
+                     PresionaBotonCorrectoBitmap, /* Variable que se genera automáticamente */
+                     (uint16 *)BG_BMP_RAM(0), /* Dirección del fondo principal */
+                     PresionaBotonCorrectoBitmapLen); /* Longitud en bytes, variable que se genera automáticamente */
+}
+
+void visualizarPresionaBotonIncorrecto() {
+
+    dmaCopyHalfWords(DMA_CHANNEL,
+                     PresionaBotonIncorrectoBitmap, /* Variable que se genera automáticamente */
+                     (uint16 *)BG_BMP_RAM(0), /* Dirección del fondo principal */
+                     PresionaBotonIncorrectoBitmapLen); /* Longitud en bytes, variable que se genera automáticamente */
+}
+
+void visualizarPresionaBotonSinPulsar() {
+
+    dmaCopyHalfWords(DMA_CHANNEL,
+                     PresionaBotonSinPulsarBitmap, /* Variable que se genera automáticamente */
+                     (uint16 *)BG_BMP_RAM(0), /* Dirección del fondo principal */
+                     PresionaBotonSinPulsarBitmapLen); /* Longitud en bytes, variable que se genera automáticamente */
+}
+
+
 
 void visualizarPantallaJugarPulsada() {
 	
