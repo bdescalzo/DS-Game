@@ -33,6 +33,8 @@ int teclaAlAzar();
 char* nombreTecla();
 void inicializarValores();
 void siguienteRonda();
+void imprimirInstruccionesPantalla();
+void dormir();
 
 void juego()
 {	
@@ -51,6 +53,7 @@ void juego()
 		{	
 			visualizarPantallaJugar();
 
+			imprimirInstruccionesPantalla();
 			// SECCION: Botón de jugar.
 
 			// La pantalla MENÚ incluye un solo botón, el de jugar. Se encuentra entre los píxeles (55, 205) y (99, 161), por lo que encuestamos a la pantalla continuamente hasta que se presione dicho botón.
@@ -79,9 +82,7 @@ void juego()
 		}
 		if (ESTADO==JUEGO)
 		{
-			// TODO: Cambiar esto por una función que muestre el fondo correcto, según la tecla que haya que pulsar.
-
-			visualizarFondoDos();
+			visualizarPresionaBotonSinPulsar();
 
 			if (!teclaAPulsarSeleccionada) { // Si estamos en una nueva ronda en la que aún no hay elección de nueva tecla, se hace la elección.
 				seleccionarTecla();
@@ -91,7 +92,9 @@ void juego()
 			// Perdemos si ha pasado el tiempo sin presionar el botón
 			if (temp >= tiempo && !encontrado) {
 				printf("Hemos perdido por no encontrar la tecla fuera de tiempo");
-				ESTADO = MENU;
+				visualizarPresionaBotonIncorrecto();
+                dormir();
+                ESTADO = MENU;
 			}
 
 			// TODO: Migrar (parte de) este bloque, si es posible / aporta ventajas, a la rutina de atención de tiempo.
@@ -106,6 +109,8 @@ void juego()
 
 					// En función de si se ha pulsado la tecla correcta, se pasa a la siguiente ronda o se pierde el juego
 					if (teclaInputteada != teclaAPulsar) {
+                        visualizarPresionaBotonIncorrecto();
+                        dormir();
 						//consoleClear();
 						//printf("SE ESPERABA LA TECLA %d", teclaAPulsar);
 						//printf("SE HA RECIBIDO LA TECLA %d", teclaInputteada);
@@ -115,6 +120,8 @@ void juego()
 						PararTempo();
 					}
 					else {
+                        visualizarPresionaBotonCorrecto();
+                        dormir();
 						printf("Se ha encontrado la tecla a tiempo.");
 						siguienteRonda();
 					}
@@ -242,4 +249,27 @@ void seleccionarTecla() {
 	consoleClear();
 	iprintf("\x1b[22;5HTECLA NUEVA: %s, de valor %d\n", nombreNuevaTecla, teclaAPulsar);
 	teclaAPulsarSeleccionada = true;
+}
+
+// Imprime las instrucciones de juego en la pantalla
+void imprimirInstruccionesPantalla() {
+		consoleClear();
+		iprintf("\x1b[2;3HINSTRUCCIONES DE JUEGO");
+		iprintf("\x1b[6;0HPresiona las teclas que se te, ");
+        iprintf("\x1b[8;0Hindiquen, pero hazlo a tiempo!");
+		iprintf("\x1b[10;0HSi te equivocas de tecla, o");
+        iprintf("\x1b[12;0Hpasa el tiempo y no");
+        iprintf("\x1b[14;0has acertado, perderas.");
+		iprintf("\x1b[16;0HCada tecla te dara un punto, pero...");
+		iprintf("\x1b[18;0HCuidado, entre rondas el tiempo se disminuye!");
+}
+
+void dormir() {
+    int tiempoDormido = 2;
+    temp = 0;
+    while (temp <= tiempoDormido) {
+        printf("%f", temp);
+        consoleClear();
+    }
+    temp = 0;
 }
