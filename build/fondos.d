@@ -1,4 +1,4 @@
-fondos.o: /home/user/SharedFiles/ProyectoEC/EC/source/fondos.c \
+fondos.o: /home/user/SharedFiles/Proyecto/EC/source/fondos.c \
   /opt/devkitPro/libnds/include/nds.h \
   /opt/devkitPro/libnds/include/nds/libversion.h \
   /opt/devkitPro/libnds/include/nds/ndstypes.h \
@@ -47,18 +47,18 @@ fondos.o: /home/user/SharedFiles/ProyectoEC/EC/source/fondos.c \
   /opt/devkitPro/libnds/include/nds/arm9/sprite.h \
   /opt/devkitPro/libnds/include/nds/system.h \
   /opt/devkitPro/libnds/include/nds/arm9/decompress.h \
-  /home/user/SharedFiles/ProyectoEC/EC/include/fondos.h \
-  /home/user/SharedFiles/ProyectoEC/EC/include/graficos.h \
-  /home/user/SharedFiles/ProyectoEC/EC/build/FondoUno.h \
-  /home/user/SharedFiles/ProyectoEC/EC/build/FondoDos.h \
-  /home/user/SharedFiles/ProyectoEC/EC/build/Puerta.h \
-  /home/user/SharedFiles/ProyectoEC/EC/build/PuertaAbierta.h \
-  /home/user/SharedFiles/ProyectoEC/EC/build/PantallaJugar.h \
-  /home/user/SharedFiles/ProyectoEC/EC/build/PantallaJugarPulsada.h \
-  /home/user/SharedFiles/ProyectoEC/EC/build/EstateFin.h \
-  /home/user/SharedFiles/ProyectoEC/EC/build/PresionaBotonCorrecto.h \
-  /home/user/SharedFiles/ProyectoEC/EC/build/PresionaBotonIncorrecto.h \
-  /home/user/SharedFiles/ProyectoEC/EC/build/PresionaBotonSinPulsar.h
+  /home/user/SharedFiles/Proyecto/EC/include/fondos.h \
+  /home/user/SharedFiles/Proyecto/EC/include/graficos.h \
+  /home/user/SharedFiles/Proyecto/EC/build/FondoUno.h \
+  /home/user/SharedFiles/Proyecto/EC/build/FondoDos.h \
+  /home/user/SharedFiles/Proyecto/EC/build/Puerta.h \
+  /home/user/SharedFiles/Proyecto/EC/build/PuertaAbierta.h \
+  /home/user/SharedFiles/Proyecto/EC/build/PantallaJugar.h \
+  /home/user/SharedFiles/Proyecto/EC/build/PantallaJugarPulsada.h \
+  /home/user/SharedFiles/Proyecto/EC/build/EstateFin.h \
+  /home/user/SharedFiles/Proyecto/EC/build/PresionaBotonCorrecto.h \
+  /home/user/SharedFiles/Proyecto/EC/build/PresionaBotonIncorrecto.h \
+  /home/user/SharedFiles/Proyecto/EC/build/PresionaBotonSinPulsar.h
 
 /opt/devkitPro/libnds/include/nds.h:
 
@@ -156,26 +156,26 @@ fondos.o: /home/user/SharedFiles/ProyectoEC/EC/source/fondos.c \
 
 /opt/devkitPro/libnds/include/nds/arm9/decompress.h:
 
-/home/user/SharedFiles/ProyectoEC/EC/include/fondos.h:
+/home/user/SharedFiles/Proyecto/EC/include/fondos.h:
 
-/home/user/SharedFiles/ProyectoEC/EC/include/graficos.h:
+/home/user/SharedFiles/Proyecto/EC/include/graficos.h:
 
-/home/user/SharedFiles/ProyectoEC/EC/build/FondoUno.h:
+/home/user/SharedFiles/Proyecto/EC/build/FondoUno.h:
 
-/home/user/SharedFiles/ProyectoEC/EC/build/FondoDos.h:
+/home/user/SharedFiles/Proyecto/EC/build/FondoDos.h:
 
-/home/user/SharedFiles/ProyectoEC/EC/build/Puerta.h:
+/home/user/SharedFiles/Proyecto/EC/build/Puerta.h:
 
-/home/user/SharedFiles/ProyectoEC/EC/build/PuertaAbierta.h:
+/home/user/SharedFiles/Proyecto/EC/build/PuertaAbierta.h:
 
-/home/user/SharedFiles/ProyectoEC/EC/build/PantallaJugar.h:
+/home/user/SharedFiles/Proyecto/EC/build/PantallaJugar.h:
 
-/home/user/SharedFiles/ProyectoEC/EC/build/PantallaJugarPulsada.h:
+/home/user/SharedFiles/Proyecto/EC/build/PantallaJugarPulsada.h:
 
-/home/user/SharedFiles/ProyectoEC/EC/build/EstateFin.h:
+/home/user/SharedFiles/Proyecto/EC/build/EstateFin.h:
 
-/home/user/SharedFiles/ProyectoEC/EC/build/PresionaBotonCorrecto.h:
+/home/user/SharedFiles/Proyecto/EC/build/PresionaBotonCorrecto.h:
 
-/home/user/SharedFiles/ProyectoEC/EC/build/PresionaBotonIncorrecto.h:
+/home/user/SharedFiles/Proyecto/EC/build/PresionaBotonIncorrecto.h:
 
-/home/user/SharedFiles/ProyectoEC/EC/build/PresionaBotonSinPulsar.h:
+/home/user/SharedFiles/Proyecto/EC/build/PresionaBotonSinPulsar.h:

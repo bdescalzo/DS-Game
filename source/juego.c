@@ -35,6 +35,12 @@ void inicializarValores();
 void siguienteRonda();
 void imprimirInstruccionesPantalla();
 void dormir();
+void mostrarPuntuacion();
+
+void mostrarPuntuacion(){
+	printf("Puntuacion: %d", puntuacion);
+}
+
 
 void juego()
 {	
@@ -231,7 +237,7 @@ void siguienteRonda() {
 	while (TeclaDetectada()) {
 		;
 	}
-	printf("Puntuacion: %d", puntuacion);
+	mostrarPuntuacion();
 
 	// Actualizamos todos los valores de control
 	temp = 0;
