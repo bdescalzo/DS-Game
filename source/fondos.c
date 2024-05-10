@@ -31,6 +31,13 @@ void visualizarFondoUno() {
                      FondoUnoBitmapLen); /* Longitud en bytes, variable que se genera automáticamente */
 }
 
+void visualizarEstateFin() {
+
+    dmaCopyHalfWords(DMA_CHANNEL,
+                     EstateFinBitmap,
+                     (uint16 *)BG_BMP_RAM(0),
+                     EstateFinBitmapLen);
+}
 
 void visualizarPresionaBotonCorrecto() {
 
@@ -95,12 +102,4 @@ void visualizarPuertaAbierta() {
                      PuertaAbiertaBitmap, /* Variable que se genera automáticamente */
                      (uint16 *)BG_BMP_RAM(0), /* Dirección del fondo principal */
                      PuertaAbiertaBitmapLen); /* Longitud en bytes, variable que se genera automáticamente */
-}
-
-void visualizarEstateFin() {
-	
-	dmaCopyHalfWords(DMA_CHANNEL,
-                     EstateFinBitmap, /* Variable que se genera automáticamente */
-                     (uint16 *)BG_BMP_RAM(0), /* Dirección del fondo principal */
-                     EstateFinBitmapLen); /* Longitud en bytes, variable que se genera automáticamente */
 }
