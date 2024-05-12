@@ -94,7 +94,7 @@ void juego()
 				printf("Hemos perdido por no encontrar la tecla fuera de tiempo");
 				visualizarPresionaBotonIncorrecto();
                 dormir();
-                ESTADO = MENU;
+                ESTADO = FIN;
 			}
 
 			// TODO: Migrar (parte de) este bloque, si es posible / aporta ventajas, a la rutina de atención de tiempo.
@@ -114,7 +114,7 @@ void juego()
 						//consoleClear();
 						//printf("SE ESPERABA LA TECLA %d", teclaAPulsar);
 						//printf("SE HA RECIBIDO LA TECLA %d", teclaInputteada);
-						ESTADO = MENU;
+						ESTADO = FIN;
 						InhibirIntTeclado();
 						InhibirIntTempo();
 						PararTempo();
@@ -143,7 +143,10 @@ void juego()
 			//printf("%s", nombreTecla(teclaAPulsar));
 
 		if (ESTADO==FIN){
-			ESTADO=MENU;
+			consoleClear();
+			printf("%d", puntuacion);
+			inicializarValores();
+			visualizarEstateFin();
 		}
 	}
 }

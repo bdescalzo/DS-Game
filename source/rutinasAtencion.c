@@ -33,6 +33,17 @@ void RutAtencionTeclado ()
 			PonerEnMarchaTempo();
 		}
 	}
+
+	if (ESTADO == FIN) {
+		if (TeclaPulsada() == START) {
+			ESTADO = JUEGO;
+		}
+
+		if (TeclaPulsada() == SELECT) {
+			ESTADO = MENU;
+		}
+
+	}
 }
 
 void RutAtencionTempo()

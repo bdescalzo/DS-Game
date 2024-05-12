@@ -29,7 +29,9 @@ void visualizarFondoUno() {
                      FondoUnoBitmap, /* Variable que se genera automáticamente */
                      (uint16 *)BG_BMP_RAM(0), /* Dirección del fondo principal */
                      FondoUnoBitmapLen); /* Longitud en bytes, variable que se genera automáticamente */
+
 }
+
 
 
 void visualizarPresionaBotonCorrecto() {
