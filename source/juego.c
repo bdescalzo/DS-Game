@@ -23,11 +23,13 @@ bool pulsado;
 int puntuacion = 0;
 double tiempo = 3;
 double temp = 0;
-int teclaAPulsar;
-int teclaInputteada;
-bool encontrado;
-bool teclaAPulsarSeleccionada;
-int x = 100;
+int teclaAPulsar; // Almacena la tecla que se debe pulsar en cada ronda
+int teclaInputteada; // Cuando en una ronda se recibe un input válido, se almacena en esta variable
+bool encontrado; // Booleano que vale TRUE si en una ronda se ha acertado la tecla
+bool teclaAPulsarSeleccionada; // Booleano que vale TRUE si en una ronda ya se ha escogido al azar una nueva tecla
+
+// Coordenadas para imprimir los sprites de las teclas a pulsar
+int x = 105;
 int y = 100;
 
 touchPosition pos_pantalla;
@@ -45,10 +47,6 @@ void perder();
 
 void juego()
 {	
-	// Definiciones de variables
-	//int i=9;
-	//int tecla=0;
-
 	ESTADO=MENU;
 
 	touchRead(&pos_pantalla); // Primera lectura de la pantalla para establecer valores iniciales
@@ -132,10 +130,10 @@ void juego()
 					else {
                         visualizarPresionaBotonCorrecto();
                         dormir();
-						printf("Se ha encontrado la tecla a tiempo.");
 						siguienteRonda();
 					}
 				}
+				// Si se han detectado START o SELECT, consideramos que no se ha inputteado nada de cara al bucle de juego
 				else {
 					teclaInputteada = -1;
 				}
@@ -145,6 +143,7 @@ void juego()
 		}
 
 		if (ESTADO==FIN){
+			// En el estado FIN, estamos a la espera de los inputs de START o SELECT. Por tanto, para evitar un if vacío, imprimimos un carácter vacío: si no, el juego no funciona correctamente.
 			iprintf("\x1b[20;4 ");
 		}
 	}
@@ -152,17 +151,19 @@ void juego()
 
 // Ejecuta las funciones correspondientes a finalizar una partida
 void perder() {
+	// Se ejecuta un cooldown antes de pasar al estado de FIN
 	dormir();
 	ESTADO = FIN;
+	// Se limpia la pantalla, eliminando tanto texto como sprites.
 	consoleClear();
 	ocultarSpritesTeclas();
-	printf("PUNTUACION: %d", puntuacion);
 	visualizarEstateFin();
-	consoleClear();
+	// Se detienen las interrupciones de temporizador hasta la siguiente ronda
 	PararTempo();
 	InhibirIntTempo();
 	iprintf("PUNTUACION: %d", puntuacion);
 }
+
 // Devuelve una tecla al azar (entre: A, B, Arriba, Abajo, Izquierda, Derecha, L, R)
 int teclaAlAzar() {
 	int valorAzar = rand() % 8;
@@ -196,7 +197,7 @@ int teclaAlAzar() {
 	}
 }
 
-// Dado un valor de tecla, devuelve el nombre de la tecla en un string
+// Dado un valor de tecla, devuelve el nombre de la tecla en un string (función con fines de debugging)
 char* nombreTecla(int tecla) {
 	switch(tecla) {
 		case A:
