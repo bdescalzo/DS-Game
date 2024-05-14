@@ -98,25 +98,18 @@ u8 r[1024] =
 
 void GuardarSpritesMemoria(){ 
 	
-int i;
+        int i;
 
 	for(i = 0; i < 32 * 32 / 2; i++) 
 	{	
-		gfxabajo[i] = abajo[i*2] | (abajo[(i*2)+1]<<8);
+        gfxabajo[i] = abajo[i*2] | (abajo[(i*2)+1]<<8);
         gfxarriba[i] = arriba[i*2] | (arriba[(i*2)+1]<<8);
         gfxizda[i] = izda[i*2] | (izda[(i*2)+1]<<8);
-
         gfxdcha[i] = dcha[i*2] | (dcha[(i*2)+1]<<8);
-
         gfxa[i] = a[i*2] | (a[(i*2)+1]<<8);
-
         gfxb[i] = b[i*2] | (b[(i*2)+1]<<8);
-
         gfxl[i] = l[i*2] | (l[(i*2)+1]<<8);
-
         gfxr[i] = r[i*2] | (r[(i*2)+1]<<8);
-
-		
 	}
 
 }

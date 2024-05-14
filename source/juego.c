@@ -123,9 +123,9 @@ void juego()
 						//consoleClear();
 						//printf("SE ESPERABA LA TECLA %d", teclaAPulsar);
 						//printf("SE HA RECIBIDO LA TECLA %d", teclaInputteada);
-						
+						perder();
 
-                        InhibirIntTeclado();
+                        //InhibirIntTeclado();
 						InhibirIntTempo();
 						PararTempo();
 					}
@@ -145,19 +145,23 @@ void juego()
 		}
 
 		if (ESTADO==FIN){
-			
-			visualizarEstateFin();
+			iprintf("\x1b[20;4 ");
 		}
 	}
 }
 
 // Ejecuta las funciones correspondientes a finalizar una partida
 void perder() {
+	dormir();
 	ESTADO = FIN;
 	consoleClear();
 	ocultarSpritesTeclas();
-	printf("%d", puntuacion);
-	inicializarValores();
+	printf("PUNTUACION: %d", puntuacion);
+	visualizarEstateFin();
+	consoleClear();
+	PararTempo();
+	InhibirIntTempo();
+	iprintf("PUNTUACION: %d", puntuacion);
 }
 // Devuelve una tecla al azar (entre: A, B, Arriba, Abajo, Izquierda, Derecha, L, R)
 int teclaAlAzar() {
@@ -280,8 +284,7 @@ void dormir() {
     int tiempoDormido = 2;
     temp = 0;
     while (temp <= tiempoDormido) {
-        printf("%f", temp);
-        consoleClear();
+		printf("%f\n\n", temp);
     }
     temp = 0;
 }
