@@ -17,20 +17,30 @@ int save;	// Para guardar el temporizador;
 void RutAtencionTeclado ()
 {
 	if (ESTADO == JUEGO || ESTADO == PAUSA) {
-		printf("jejeje");
 		if (TeclaPulsada() == SELECT) {
-			printf("UUUUF");
+			ocultarSpritesTeclas();
 			ESTADO = MENU;
 			PararTempo();
 			InhibirIntTempo();
 		}
 		if (ESTADO == JUEGO && TeclaPulsada() == START) {
+			consoleClear();
+			printf("JUEGO PAUSADO: PULSA \nSTART PARA CONTINUAR");
+			while (TeclaDetectada()) {
+				;
+			}
 			ESTADO = PAUSA;
 			PararTempo();
+			InhibirIntTempo();
 		}
 		if (ESTADO == PAUSA && TeclaPulsada() == START){
+			consoleClear();
+			while (TeclaDetectada()) {
+				;
+			}
 			ESTADO = JUEGO;
 			PonerEnMarchaTempo();
+			HabilitarIntTempo();
 		}
 	}
 
@@ -40,7 +50,6 @@ void RutAtencionTeclado ()
 			PonerEnMarchaTempo();
 			HabilitarIntTempo();
 			inicializarValores();
-			//mostrarSpriteTecla();
 		}
 
 		if (TeclaPulsada() == SELECT) {
