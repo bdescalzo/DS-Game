@@ -50,7 +50,8 @@ juego.o: /home/user/SharedFiles/ProyectoEC/EC/source/juego.c \
   /home/user/SharedFiles/ProyectoEC/EC/include/definiciones.h \
   /home/user/SharedFiles/ProyectoEC/EC/include/perifericos.h \
   /home/user/SharedFiles/ProyectoEC/EC/include/rutinasAtencion.h \
-  /home/user/SharedFiles/ProyectoEC/EC/include/fondos.h
+  /home/user/SharedFiles/ProyectoEC/EC/include/fondos.h \
+  /home/user/SharedFiles/ProyectoEC/EC/include/sprites.h
 
 /opt/devkitPro/libnds/include/nds.h:
 
@@ -155,3 +156,5 @@ juego.o: /home/user/SharedFiles/ProyectoEC/EC/source/juego.c \
 /home/user/SharedFiles/ProyectoEC/EC/include/rutinasAtencion.h:
 
 /home/user/SharedFiles/ProyectoEC/EC/include/fondos.h:
+
+/home/user/SharedFiles/ProyectoEC/EC/include/sprites.h:

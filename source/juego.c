@@ -15,6 +15,7 @@ y en otro ejemplo de Jaeden Ameronen
 #include "perifericos.h"
 #include "rutinasAtencion.h"
 #include "fondos.h"
+#include "sprites.h"
 
 // VARIABLES PRINCIPALES
 double velocidad;
@@ -26,24 +27,30 @@ int teclaAPulsar;
 int teclaInputteada;
 bool encontrado;
 bool teclaAPulsarSeleccionada;
+int x = 100;
+int y = 100;
 
 touchPosition pos_pantalla;
 
+
+// DECLARACIÓN DE FUNCIONES
 int teclaAlAzar();
 char* nombreTecla();
 void inicializarValores();
 void siguienteRonda();
 void imprimirInstruccionesPantalla();
 void dormir();
+void mostrarSpriteTecla();
+void perder();
 
 void juego()
 {	
 	// Definiciones de variables
-	int i=9;
-	int tecla=0;
+	//int i=9;
+	//int tecla=0;
 
 	ESTADO=MENU;
-	
+
 	touchRead(&pos_pantalla); // Primera lectura de la pantalla para establecer valores iniciales
 
 	// BUCLE PRINCIPAL DE JUEGO: Controla la máquina de estados
@@ -78,14 +85,16 @@ void juego()
 			PonerEnMarchaTempo();
 			inicializarValores();
 			ESTADO=JUEGO;
-
+			
 		}
 		if (ESTADO==JUEGO)
 		{
 			visualizarPresionaBotonSinPulsar();
 
 			if (!teclaAPulsarSeleccionada) { // Si estamos en una nueva ronda en la que aún no hay elección de nueva tecla, se hace la elección.
-				seleccionarTecla();
+				ocultarSpritesTeclas();
+                seleccionarTecla();
+				mostrarSpriteTecla();
 				printf("CAE NUEVA: %s", nombreTecla(teclaAPulsar));
 			}
 
@@ -94,8 +103,8 @@ void juego()
 				printf("Hemos perdido por no encontrar la tecla fuera de tiempo");
 				visualizarPresionaBotonIncorrecto();
                 dormir();
-                ESTADO = FIN;
-			}
+				perder();
+            }
 
 			// TODO: Migrar (parte de) este bloque, si es posible / aporta ventajas, a la rutina de atención de tiempo.
 			// Si se detecta el primer input de la ronda (es decir, teclaInputteada=-1), se revisa si es la opción correcta
@@ -114,8 +123,9 @@ void juego()
 						//consoleClear();
 						//printf("SE ESPERABA LA TECLA %d", teclaAPulsar);
 						//printf("SE HA RECIBIDO LA TECLA %d", teclaInputteada);
-						ESTADO = FIN;
-						InhibirIntTeclado();
+						
+
+                        InhibirIntTeclado();
 						InhibirIntTempo();
 						PararTempo();
 					}
@@ -143,12 +153,19 @@ void juego()
 			//printf("%s", nombreTecla(teclaAPulsar));
 
 		if (ESTADO==FIN){
-			consoleClear();
-			printf("%d", puntuacion);
-			inicializarValores();
+			
 			visualizarEstateFin();
 		}
 	}
+}
+
+// Ejecuta las funciones correspondientes a finalizar una partida
+void perder() {
+	ESTADO = FIN;
+	consoleClear();
+	ocultarSpritesTeclas();
+	printf("%d", puntuacion);
+	inicializarValores();
 }
 // Devuelve una tecla al azar (entre: A, B, Arriba, Abajo, Izquierda, Derecha, L, R)
 int teclaAlAzar() {
@@ -275,4 +292,44 @@ void dormir() {
         consoleClear();
     }
     temp = 0;
+}
+
+void mostrarSpriteTecla() {
+	switch (teclaAPulsar) {
+        case A:
+            MostrarA(0, x, y);
+            break;
+        case B:
+            MostrarB(1, x, y);
+            break;
+        case ARRIBA:
+            MostrarArriba(2, x, y);
+            break;
+        case ABAJO:
+            MostrarAbajo(3, x, y);
+            break;
+        case IZQUIERDA:
+            MostrarIzda(4, x, y);
+            break;
+        case DERECHA:
+            MostrarDcha(5, x, y);
+            break;
+        case L:
+            MostrarL(6, x, y);
+            break;
+        case R:
+            MostrarR(7, x, y);
+            break;
+    }
+}
+
+void ocultarSpritesTeclas() {
+    BorrarA(0, x, y);
+    BorrarB(1, x, y);
+    BorrarArriba(2, x, y);
+    BorrarAbajo(3, x, y);
+    BorrarIzda(4, x, y);
+    BorrarDcha(5, x, y);
+    BorrarL(6, x, y);
+    BorrarR(7, x, y);
 }

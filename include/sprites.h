@@ -30,4 +30,11 @@ extern void BorrarRombo(int indice, int x, int y);
 extern void MostrarRomboGrande(int indice, int x, int y);
 extern void BorrarRomboGrande(int indice, int x, int y);
 
-
+extern void MostrarAbajo(int indice, int x, int y);
+extern void MostrarArriba(int indice, int x, int y);
+extern void MostrarIzda(int indice, int x, int y);
+extern void MostrarDcha(int indice, int x, int y);
+extern void MostrarA(int indice, int x, int y);
+extern void MostrarB(int indice, int x, int y);
+extern void MostrarL(int indice, int x, int y);
+extern void MostrarR(int indice, int x, int y);
