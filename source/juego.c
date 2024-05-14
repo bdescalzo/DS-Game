@@ -142,15 +142,7 @@ void juego()
 			}
 		
 
-
-			//if (ESTADO==JUEGO) {
-			//	teclaAPulsar= teclaAlAzar();
-			//	printf("NUEVA TECLA ELEGIDA:%d", &teclaAPulsar);
-			//	teclaAPulsarSeleccionada=true;
-			//}	
 		}
-
-			//printf("%s", nombreTecla(teclaAPulsar));
 
 		if (ESTADO==FIN){
 			
