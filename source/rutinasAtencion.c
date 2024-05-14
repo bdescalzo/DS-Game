@@ -33,6 +33,21 @@ void RutAtencionTeclado ()
 			PonerEnMarchaTempo();
 		}
 	}
+
+	if (ESTADO == FIN) {
+		if (TeclaPulsada() == START) {
+			ESTADO = JUEGO;
+			PonerEnMarchaTempo();
+			HabilitarIntTempo();
+			inicializarValores();
+			//mostrarSpriteTecla();
+		}
+
+		if (TeclaPulsada() == SELECT) {
+			ESTADO = MENU;
+		}
+
+	}
 }
 
 void RutAtencionTempo()
@@ -42,7 +57,6 @@ void RutAtencionTempo()
 	if (ESTADO==JUEGO)
 	{
 		tick++;
-		iprintf("\x1b[2;3H%d", tick);	
 		temp=temp+0.005;
 	}		
 }	
@@ -53,4 +67,4 @@ void EstablecerVectorInt()
 // A COMPLETAR
 	irqSet(IRQ_KEYS,RutAtencionTeclado);
 	irqSet(IRQ_TIMER0,RutAtencionTempo);
-}
+}			visualizarEstateFin();

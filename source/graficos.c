@@ -108,7 +108,7 @@ void inicializarGraficos()
 /* Inicializar la memoria para los Sprites */
 void initSpriteMem() {
 
-	oamInit(&oamMain, SpriteMapping_1D_32, false);
+	oamInit(&oamMain, SpriteMapping_1D_64, false);
 	oamInit(&oamSub, SpriteMapping_1D_32, false);
 }
 

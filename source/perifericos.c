@@ -28,8 +28,8 @@ int TeclaPulsada()
 	else if ((~TECLAS_DAT & 0x02)!=0) return B;
 	else if ((~TECLAS_DAT & 0x04)!=0) return SELECT;
 	else if ((~TECLAS_DAT & 0x08)!=0) return START;
-	else if ((~TECLAS_DAT & 0x010)!=0) return IZQUIERDA;
-	else if ((~TECLAS_DAT & 0x020)!=0) return DERECHA;
+	else if ((~TECLAS_DAT & 0x010)!=0) return DERECHA;
+	else if ((~TECLAS_DAT & 0x020)!=0) return IZQUIERDA;
 	else if ((~TECLAS_DAT & 0x040)!=0) return ARRIBA;
 	else if ((~TECLAS_DAT & 0x080)!=0) return ABAJO;
 	else if ((~TECLAS_DAT & 0x0100)!=0) return R;
