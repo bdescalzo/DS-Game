@@ -25,7 +25,6 @@ double tiempo = 3;
 double temp = 0;
 int teclaAPulsar; // Almacena la tecla que se debe pulsar en cada ronda
 int teclaInputteada; // Cuando en una ronda se recibe un input válido, se almacena en esta variable
-bool encontrado; // Booleano que vale TRUE si en una ronda se ha acertado la tecla
 bool teclaAPulsarSeleccionada; // Booleano que vale TRUE si en una ronda ya se ha escogido al azar una nueva tecla
 
 // Coordenadas para imprimir los sprites de las teclas a pulsar
@@ -96,7 +95,7 @@ void juego()
 			}
 
 			// Perdemos si ha pasado el tiempo sin presionar el botón
-			if (temp >= tiempo && !encontrado) {
+			if (temp >= tiempo) {
 				visualizarPresionaBotonIncorrecto();
                 dormir();
 				perder();
@@ -114,9 +113,6 @@ void juego()
                         visualizarPresionaBotonIncorrecto();
                         dormir();
 						perder();
-
-						InhibirIntTempo();
-						PararTempo();
 					}
 					else {
                         visualizarPresionaBotonCorrecto();
@@ -224,7 +220,6 @@ char* nombreTecla(int tecla) {
 // Restablece los valores de la partida a su estado inicial, para comenzar un nuevo juego.
 void inicializarValores() {
 	velocidad = 1;
-	encontrado = false;
 	puntuacion = 0;
 	tiempo = 3.0;
 	temp = 0.0;
@@ -244,7 +239,6 @@ void siguienteRonda() {
 	// Actualizamos todos los valores de control
 	temp = 0;
 	teclaInputteada = -1;
-	encontrado = false;
 	teclaAPulsarSeleccionada = false;
 	tiempo = tiempo * 0.95; // Reducimos el tiempo
 }
