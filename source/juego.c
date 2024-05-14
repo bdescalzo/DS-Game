@@ -271,6 +271,7 @@ void imprimirInstruccionesPantalla() {
 		iprintf("\x1b[18;0HCuidado, entre rondas el tiempo se disminuye!");
 }
 
+// Hace un "cooldown" de unos instantes entre ronda y ronda, gracias al que se puede ver si se ha acertado o fallado con la tecla pulsada
 void dormir() {
     int tiempoDormido = 2;
     temp = 0;
@@ -280,6 +281,7 @@ void dormir() {
     temp = 0;
 }
 
+// Toma la tecla a pulsar en el momento de la llamada, y muestra su correspondiente sprite en pantalla.
 void mostrarSpriteTecla() {
 	switch (teclaAPulsar) {
         case A:
@@ -309,6 +311,7 @@ void mostrarSpriteTecla() {
     }
 }
 
+// Oculta los sprites de todas las teclas.
 void ocultarSpritesTeclas() {
     BorrarA(0, x, y);
     BorrarB(1, x, y);
