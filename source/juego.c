@@ -26,7 +26,7 @@ double temp = 0;
 int teclaAPulsar; // Almacena la tecla que se debe pulsar en cada ronda
 int teclaInputteada; // Cuando en una ronda se recibe un input válido, se almacena en esta variable
 bool teclaAPulsarSeleccionada; // Booleano que vale TRUE si en una ronda ya se ha escogido al azar una nueva tecla
-
+int globo = 0; // Valor para el movimiento del globo, en 3 posiciones diferentes
 // Coordenadas para imprimir los sprites de las teclas a pulsar
 int x = 105;
 int y = 100;
@@ -101,7 +101,6 @@ void juego()
 				perder();
             }
 
-			// TODO: Migrar (parte de) este bloque, si es posible / aporta ventajas, a la rutina de atención de tiempo.
 			// Si se detecta el primer input de la ronda (es decir, teclaInputteada=-1), se revisa si es la opción correcta
 			if (TeclaDetectada() && temp < tiempo && teclaInputteada==-1) {
 				teclaInputteada = TeclaPulsada();
@@ -270,7 +269,7 @@ void dormir() {
     int tiempoDormido = 2;
     temp = 0;
     while (temp <= tiempoDormido) {
-		printf("%f\n\n", temp);
+		printf(" ");
     }
     temp = 0;
 }
