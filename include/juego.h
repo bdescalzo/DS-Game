@@ -11,6 +11,5 @@ extern int puntuacion;
 extern double tiempo;
 extern double temp;
 extern int teclaAPulsar;
-extern bool encontrado;
 extern bool teclaAPulsarSeleccionada;
 extern int teclaInputteada;

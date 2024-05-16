@@ -48,6 +48,7 @@ touchPosition PANT_DAT;
 #define JUEGO 1
 #define PAUSA 2
 #define FIN 3
+#define ESPERA 4
 
 extern int ESTADO;
 

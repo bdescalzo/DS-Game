@@ -16,21 +16,29 @@ int save;	// Para guardar el temporizador;
 
 void RutAtencionTeclado ()
 {
-	if (ESTADO == JUEGO || ESTADO == PAUSA) {
-		printf("jejeje");
-		if (TeclaPulsada() == SELECT) {
-			printf("UUUUF");
+	if (ESTADO != FIN) {
+		if (TeclaPulsada() == SELECT && ESTADO != ESPERA) {
+			ocultarSpritesTeclas();
 			ESTADO = MENU;
+		}
+		if (ESTADO == JUEGO && TeclaPulsada() == START) {
+			consoleClear();
+			printf("JUEGO PAUSADO: PULSA \nSTART PARA CONTINUAR");
+			while (TeclaDetectada()) {
+				;
+			}
+			ESTADO = PAUSA;
 			PararTempo();
 			InhibirIntTempo();
 		}
-		if (ESTADO == JUEGO && TeclaPulsada() == START) {
-			ESTADO = PAUSA;
-			PararTempo();
-		}
 		if (ESTADO == PAUSA && TeclaPulsada() == START){
+			consoleClear();
+			while (TeclaDetectada()) {
+				;
+			}
 			ESTADO = JUEGO;
 			PonerEnMarchaTempo();
+			HabilitarIntTempo();
 		}
 	}
 
@@ -40,7 +48,6 @@ void RutAtencionTeclado ()
 			PonerEnMarchaTempo();
 			HabilitarIntTempo();
 			inicializarValores();
-			//mostrarSpriteTecla();
 		}
 
 		if (TeclaPulsada() == SELECT) {
@@ -54,7 +61,7 @@ void RutAtencionTempo()
 {
 	static int tick=0;
 	static int seg=0;
-	if (ESTADO==JUEGO)
+	if (ESTADO==JUEGO || ESTADO==ESPERA)
 	{
 		tick++;
 		temp=temp+0.005;
@@ -67,4 +74,4 @@ void EstablecerVectorInt()
 // A COMPLETAR
 	irqSet(IRQ_KEYS,RutAtencionTeclado);
 	irqSet(IRQ_TIMER0,RutAtencionTempo);
-}			visualizarEstateFin();
+}
