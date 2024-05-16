@@ -16,8 +16,8 @@ int save;	// Para guardar el temporizador;
 
 void RutAtencionTeclado ()
 {
-	if (ESTADO == JUEGO || ESTADO == PAUSA) {
-		if (TeclaPulsada() == SELECT) {
+	if (ESTADO != FIN) {
+		if (TeclaPulsada() == SELECT && ESTADO != ESPERA) {
 			ocultarSpritesTeclas();
 			ESTADO = MENU;
 		}
@@ -61,7 +61,7 @@ void RutAtencionTempo()
 {
 	static int tick=0;
 	static int seg=0;
-	if (ESTADO==JUEGO)
+	if (ESTADO==JUEGO || ESTADO==ESPERA)
 	{
 		tick++;
 		temp=temp+0.005;
@@ -74,4 +74,4 @@ void EstablecerVectorInt()
 // A COMPLETAR
 	irqSet(IRQ_KEYS,RutAtencionTeclado);
 	irqSet(IRQ_TIMER0,RutAtencionTempo);
-}			visualizarEstateFin();
+}

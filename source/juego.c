@@ -273,12 +273,19 @@ void imprimirInstruccionesPantalla() {
 
 // Hace un "cooldown" de unos instantes entre ronda y ronda, gracias al que se puede ver si se ha acertado o fallado con la tecla pulsada
 void dormir() {
+	// Guardamos un backup del estado en el que se ha llamado a dormir
+	int ESTADO_VIEJO = ESTADO;
+	ESTADO = ESPERA;
     int tiempoDormido = 2;
     temp = 0;
     while (temp <= tiempoDormido) {
 		printf(" ");
     }
+
+	printf("KACHAW");
     temp = 0;
+	// Recuperamos el estado original
+	ESTADO = ESTADO_VIEJO;
 }
 
 // Toma la tecla a pulsar en el momento de la llamada, y muestra su correspondiente sprite en pantalla.
