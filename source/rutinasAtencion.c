@@ -20,8 +20,6 @@ void RutAtencionTeclado ()
 		if (TeclaPulsada() == SELECT) {
 			ocultarSpritesTeclas();
 			ESTADO = MENU;
-			PararTempo();
-			InhibirIntTempo();
 		}
 		if (ESTADO == JUEGO && TeclaPulsada() == START) {
 			consoleClear();

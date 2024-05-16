@@ -55,15 +55,22 @@ void juego()
 	{	
 		if (ESTADO==MENU) 
 		{	
+			/* En caso de que se haya vuelto al menú desde el juego, queremos asegurarnos de que se pare el tiempo.
+			Sin embargo, en ocasiones es necesario hacerlo desde aquí, pues si se intenta usar el método de SELECT durante
+			un cooldown, el juego no funcionaría correctamente, al no poder finalizar dicho cooldown.
+			*/
+			PararTempo();
+			InhibirIntTempo();
+
 			visualizarPantallaJugar();
 
 			imprimirInstruccionesPantalla();
 			// SECCION: Botón de jugar.
 
-			// La pantalla MENÚ incluye un solo botón, el de jugar. Se encuentra entre los píxeles (55, 205) y (99, 161), por lo que encuestamos a la pantalla continuamente hasta que se presione dicho botón.
+			/* La pantalla MENÚ incluye un solo botón, el de jugar. Se encuentra entre los píxeles (55, 205) y (99, 161),
+			por lo que encuestamos a la pantalla continuamente hasta que se presione dicho botón.*/
 			touchRead(&pos_pantalla);
 
-			// Realizamos una encuesta a la pantalla hasta que se presione el área del botón para jugar
  			while(!((55<=pos_pantalla.px && pos_pantalla.px<=205)) || !(99<=pos_pantalla.py && pos_pantalla.py<=161)) {
 				touchRead(&pos_pantalla);
 			}
